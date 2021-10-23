@@ -1,22 +1,47 @@
 ---
 title: "Project proposal"
-author: "Team name"
+author: "team"
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 library(broom)
+library(tidytuesdayR)
+```
+
+```{r read-grosses, message = FALSE}
+grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
+
 ```
 
 *For instructions on what each section should include, please see the [project page](https://idsed.digital/assessments/project/#proposal) on the course website. Remove this text when completing your proposal*.
 
 ## 1. Introduction
 
+General Research Question: How to maximise gross weekly revenue in a Broadway show?
 
+The dataset used comes from Playbill, which is a US magazine for theatre-goers. The information of weekly box office grosses comes from 'The Broadway League', an association for Broadway theatres. 
+
+There are 47,524 cases of shows that are being played in the theatres at different times in a year.
+
+There are 14 variables. Some of the more important ones which we will be using in our analysis include the following:
+
+1. `show`
+2. `theatre`
+3. `weekly_gross`
+4. `avg_ticket_price`
+5. `seats_sold`
+6. `seat_capacity`
+7. `performances`
 
 ## 2. Data
 
+```{r glimpse-file}
+glimpse(grosses)
+```
 
 
 ## 3. Data analysis plan
