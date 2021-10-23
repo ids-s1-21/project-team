@@ -76,3 +76,25 @@ Our hypotheses are: Higher “average ticket price”, “seats sold”, and
 More specifically, higher “seat capacity” and “number of week being run”
 can lead to higher “average ticket price”, and the type of “theater”
 matters as well.
+
+We will use inferential statistics method which helps show relationship
+and tendency of data. R visualization helps show the relationship and
+tendency.For example, to visualize the relation between “average ticket
+price” and “gross weekly revenue”, we use code:
+
+``` r
+grosses%>%
+  ggplot(aes(y=weekly_gross,x=avg_ticket_price))+
+  geom_smooth()
+```
+
+    ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+
+![](proposal_files/figure-gfm/code_preliminary-1.png)<!-- --> By the
+preliminary visualization, we get a curve which increases first but
+decreases after price of 350. We are going to explore the reason causes
+the decrease later.
+
+To support our hypothesis before, we have to draw graphs of the
+variables in the hypothesis correspondingly– the positive correlation
+supports the hypothesis.
