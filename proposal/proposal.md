@@ -63,3 +63,16 @@ glimpse(grosses)
     ## $ previews             <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0…
 
 ## 3. Data analysis plan
+
+In general, we set “weekly gross revenue” as the response Y, “average
+ticket price”, “seats sold”, and “number of performances per week” as
+the corresponding X. For further analysis, we consider “average ticket
+price” as the response Y, “seat capacity”, “name of theater”, “number of
+week being run” as the corresponding X, to more specifically figure out
+how each factors contribute to maximize weekly gross revenue.
+
+Our hypotheses are: Higher “average ticket price”, “seats sold”, and
+“number of performances per week” lead to higher “gross weekly revenue”.
+More specifically, higher “seat capacity” and “number of week being run”
+can lead to higher “average ticket price”, and the type of “theater”
+matters as well.
