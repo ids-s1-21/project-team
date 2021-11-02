@@ -71,11 +71,11 @@ price” as the response Y, “seat capacity”, “name of theater”, “numbe
 week being run” as the corresponding X, to more specifically figure out
 how each factors contribute to maximize weekly gross revenue.
 
-Our hypotheses are: Higher “average ticket price”, “seats sold”, and
-“number of performances per week” lead to higher “gross weekly revenue”.
-More specifically, higher “seat capacity” and “number of week being run”
-can lead to higher “average ticket price”, and the type of “theater”
-matters as well.
+Our hypotheses are: Higher “average ticket price”, “percentage seats
+capacity”,“seats sold”, and “number of performances per week” lead to
+higher “gross weekly revenue”. More specifically, higher “seat capacity”
+and “number of week being run” can lead to higher “average ticket
+price”, and the type of “theater” matters as well.
 
 We will use inferential statistics method which helps show relationship
 and tendency of data. R visualization helps show the relationship and
@@ -88,12 +88,107 @@ grosses%>%
   geom_smooth()
 ```
 
-    ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+![](proposal_files/figure-gfm/code_preliminary_1-1.png)<!-- --> By the
+first preliminary visualization, we get a curve which increases first
+but decreases after price of 350. We are going to explore the reason
+causes the decrease later.
 
-![](proposal_files/figure-gfm/code_preliminary-1.png)<!-- --> By the
-preliminary visualization, we get a curve which increases first but
-decreases after price of 350. We are going to explore the reason causes
-the decrease later.
+``` r
+grosses%>%
+  ggplot(aes(x=pct_capacity,y=avg_ticket_price))+
+  geom_smooth()
+```
+
+![](proposal_files/figure-gfm/code_preliminary_2-1.png)<!-- --> By the
+second preliminary visualization, we get a curve with increasing trend
+which implies higher percent of theatre seats sold causes higher average
+ticket price.
+
+``` r
+preliminary_analysis<-grosses%>%
+  summarise(mean_avg_price=mean(avg_ticket_price),
+            median_avg_price=median(avg_ticket_price),
+            max_avg_price=max(avg_ticket_price),
+            min_avg_price=min(avg_ticket_price))%>%
+  print()
+```
+
+    ## # A tibble: 1 × 4
+    ##   mean_avg_price median_avg_price max_avg_price min_avg_price
+    ##            <dbl>            <dbl>         <dbl>         <dbl>
+    ## 1           67.9             60.2          512.             0
+
+By the third preliminary analysis, we analyzed median, average, maximum
+and minimum of average ticket price.
+
+``` r
+table_theatre<-table(grosses$theatre)
+theatre_dataframe<-as.data.frame.array(table_theatre)%>%
+  print()
+```
+
+    ##                                     table_theatre
+    ## 46th Street Theatre                           205
+    ## Al Hirschfeld Theatre                         735
+    ## Ambassador Theatre                           1604
+    ## American Airlines Theatre                     766
+    ## August Wilson Theatre                         725
+    ## Belasco Theatre                               592
+    ## Bernard B. Jacobs Theatre                     588
+    ## Biltmore Theatre                              190
+    ## Booth Theatre                                1301
+    ## Broadhurst Theatre                           1829
+    ## Broadway Theatre                             1216
+    ## Brooks Atkinson Theatre                      1057
+    ## Circle in the Square Theatre                 1052
+    ## Comedy Theatre                                 11
+    ## Cort Theatre                                  725
+    ## Criterion Center Stage Right                  317
+    ## Edison Theatre                                253
+    ## Ethel Barrymore Theatre                      1170
+    ## Eugene O'Neill Theatre                       1479
+    ## Ford Center for the Performing Arts           328
+    ## Foxwoods Theatre                              160
+    ## Gerald Schoenfeld Theatre                     574
+    ## Gershwin Theatre                             1526
+    ## Helen Hayes Theater                            77
+    ## Helen Hayes Theatre                          1223
+    ## Henry Miller's Theatre                        151
+    ## Hilton Theatre                                146
+    ## Hudson Theatre                                126
+    ## Imperial Theatre                             1673
+    ## Jack Lawrence Theatre                          13
+    ## John Golden Theatre                          1130
+    ## Longacre Theatre                              650
+    ## Lunt-Fontanne Theatre                        1472
+    ## Lyceum Theatre                                841
+    ## Lyric Theatre                                 214
+    ## Majestic Theatre                             1677
+    ## Mark Hellinger Theatre                         54
+    ## Marquis Theatre                              1276
+    ## Martin Beck Theatre                           578
+    ## Minskoff Theatre                             1739
+    ## Music Box Theatre                            1139
+    ## Nederlander Theatre                          1055
+    ## Neil Simon Theatre                           1212
+    ## New Amsterdam Theatre                         655
+    ## Palace Theatre                               1019
+    ## Plymouth Theatre                              658
+    ## Richard Rodgers Theatre                      1231
+    ## Ritz Theatre                                   65
+    ## Royale Theatre                                635
+    ## Sam S. Shubert Theatre                       1314
+    ## Samuel J. Friedman Theatre                    396
+    ## St. James Theatre                            1460
+    ## Stephen Sondheim Theatre                      426
+    ## Studio 54                                     787
+    ## Virginia Theatre                              661
+    ## Vivian Beaumont Theater                      1276
+    ## Walter Kerr Theatre                          1037
+    ## Winter Garden Theatre                        1055
+
+By the forth preliminary analysis, we analyzed the different theatres
+and their frequency.
 
 To support our hypothesis before, we have to draw graphs of the
 variables in the hypothesis correspondingly– the positive correlation

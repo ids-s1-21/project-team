@@ -49,14 +49,36 @@ glimpse(grosses)
 In general, we set "weekly gross revenue" as the response Y, "average ticket price", "seats sold", and "number of performances per week" as the corresponding X. 
 For further analysis, we consider "average ticket price" as the response Y,  "seat capacity", "name of theater", "number of week being run" as the corresponding X, to more specifically figure out how each factors contribute to maximize weekly gross revenue.
 
-Our hypotheses are: Higher "average ticket price", "seats sold", and "number of performances per week" lead to higher "gross weekly revenue". More specifically, higher "seat capacity" and "number of week being run" can lead to higher "average ticket price", and the type of "theater" matters as well.
+Our hypotheses are: Higher "average ticket price", "percentage seats capacity","seats sold", and "number of performances per week" lead to higher "gross weekly revenue". More specifically, higher "seat capacity" and "number of week being run" can lead to higher "average ticket price", and the type of "theater" matters as well.
 
 We will use inferential statistics method which helps show relationship and tendency of data. R visualization helps show the relationship and tendency.For example, to visualize the relation between "average ticket price" and "gross weekly revenue", we use code:
-```{r code_preliminary}
+```{r code_preliminary_1,message=FALSE}
 grosses%>%
   ggplot(aes(y=weekly_gross,x=avg_ticket_price))+
   geom_smooth()
 ```
-By the preliminary visualization, we get a curve which increases first but decreases after price of 350. We are going to explore the reason causes the decrease later. 
+By the first preliminary visualization, we get a curve which increases first but decreases after price of 350. We are going to explore the reason causes the decrease later. 
+```{r code_preliminary_2,message=FALSE}
+grosses%>%
+  ggplot(aes(x=pct_capacity,y=avg_ticket_price))+
+  geom_smooth()
+```
+By the second preliminary visualization, we get a curve with increasing trend which implies higher percent of theatre seats sold causes higher average ticket price.
+```{r code_preliminary_3,message=FALSE}
+preliminary_analysis<-grosses%>%
+  summarise(mean_avg_price=mean(avg_ticket_price),
+            median_avg_price=median(avg_ticket_price),
+            max_avg_price=max(avg_ticket_price),
+            min_avg_price=min(avg_ticket_price))%>%
+  print()
+```
+By the third preliminary analysis, we analyzed median, average, maximum and minimum of average ticket price.
+
+```{r code_preliminary_4,message=FALSE}
+table_theatre<-table(grosses$theatre)
+theatre_dataframe<-as.data.frame.array(table_theatre)%>%
+  print()
+```
+By the forth preliminary analysis, we analyzed the different theatres and their frequency.
 
 To support our hypothesis before, we have to draw graphs of the variables  in the hypothesis correspondingly-- the positive correlation supports the hypothesis.
