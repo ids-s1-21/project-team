@@ -12,10 +12,6 @@ library(tidytuesdayR)
 grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
 ```
 
-*For instructions on what each section should include, please see the
-[project page](https://idsed.digital/assessments/project/#proposal) on
-the course website. Remove this text when completing your proposal*.
-
 ## 1. Introduction
 
 General Research Question: How to maximise gross weekly revenue in a
@@ -85,24 +81,34 @@ price” and “gross weekly revenue”, we use code:
 ``` r
 grosses%>%
   ggplot(aes(y=weekly_gross,x=avg_ticket_price))+
-  geom_smooth()
+  geom_smooth()+
+  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
+       x="Average Ticket Price",
+       y="Gross Weekly Revenue")
 ```
 
-![](proposal_files/figure-gfm/code_preliminary_1-1.png)<!-- --> By the
-first preliminary visualization, we get a curve which increases first
-but decreases after price of 350. We are going to explore the reason
-causes the decrease later.
+![](proposal_files/figure-gfm/code_preliminary_1-1.png)<!-- -->
+
+By the first preliminary visualization, we get a curve which increases
+first but decreases after price of 350. We are going to explore the
+reason causes the decrease later.
 
 ``` r
 grosses%>%
   ggplot(aes(x=pct_capacity,y=avg_ticket_price))+
-  geom_smooth()
+  geom_smooth()+
+  labs(
+    title="Influence of Theatre Seats Sold Percent",
+    x="Percent of Theatre Seats Sold",
+    y="Average Ticket Price"
+       )
 ```
 
-![](proposal_files/figure-gfm/code_preliminary_2-1.png)<!-- --> By the
-second preliminary visualization, we get a curve with increasing trend
-which implies higher percent of theatre seats sold causes higher average
-ticket price.
+![](proposal_files/figure-gfm/code_preliminary_2-1.png)<!-- -->
+
+By the second preliminary visualization, we get a curve with increasing
+trend which implies higher percent of theatre seats sold causes higher
+average ticket price.
 
 ``` r
 preliminary_analysis<-grosses%>%
@@ -189,6 +195,16 @@ theatre_dataframe<-as.data.frame.array(table_theatre)%>%
 
 By the forth preliminary analysis, we analyzed the different theatres
 and their frequency.
+
+By the previous preliminary analysis, we found that there are a bulk of
+different theatres with different seat capacity; percent sold of seat
+capacity impacts average ticket price. The size of a theatre might be a
+variable which influences the relationship between percent sold of seat
+capacity and average ticket price. We are going to mutate the theatres
+into different categories by size and do visualization.
+
+Moreover, we are going to create a new column which shows how long does
+each show in each theatre run, by “mutate” function.
 
 To support our hypothesis before, we have to draw graphs of the
 variables in the hypothesis correspondingly– the positive correlation

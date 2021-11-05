@@ -17,8 +17,6 @@ grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/ti
 
 ```
 
-*For instructions on what each section should include, please see the [project page](https://idsed.digital/assessments/project/#proposal) on the course website. Remove this text when completing your proposal*.
-
 ## 1. Introduction
 
 General Research Question: How to maximise gross weekly revenue in a Broadway show?
@@ -52,18 +50,31 @@ For further analysis, we consider "average ticket price" as the response Y,  "se
 Our hypotheses are: Higher "average ticket price", "percentage seats capacity","seats sold", and "number of performances per week" lead to higher "gross weekly revenue". More specifically, higher "seat capacity" and "number of week being run" can lead to higher "average ticket price", and the type of "theater" matters as well.
 
 We will use inferential statistics method which helps show relationship and tendency of data. R visualization helps show the relationship and tendency.For example, to visualize the relation between "average ticket price" and "gross weekly revenue", we use code:
+
 ```{r code_preliminary_1,message=FALSE}
 grosses%>%
   ggplot(aes(y=weekly_gross,x=avg_ticket_price))+
-  geom_smooth()
+  geom_smooth()+
+  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
+       x="Average Ticket Price",
+       y="Gross Weekly Revenue")
 ```
+
 By the first preliminary visualization, we get a curve which increases first but decreases after price of 350. We are going to explore the reason causes the decrease later. 
+
 ```{r code_preliminary_2,message=FALSE}
 grosses%>%
   ggplot(aes(x=pct_capacity,y=avg_ticket_price))+
-  geom_smooth()
+  geom_smooth()+
+  labs(
+    title="Influence of Theatre Seats Sold Percent",
+    x="Percent of Theatre Seats Sold",
+    y="Average Ticket Price"
+       )
 ```
+
 By the second preliminary visualization, we get a curve with increasing trend which implies higher percent of theatre seats sold causes higher average ticket price.
+
 ```{r code_preliminary_3,message=FALSE}
 preliminary_analysis<-grosses%>%
   summarise(mean_avg_price=mean(avg_ticket_price),
@@ -72,6 +83,7 @@ preliminary_analysis<-grosses%>%
             min_avg_price=min(avg_ticket_price))%>%
   print()
 ```
+
 By the third preliminary analysis, we analyzed median, average, maximum and minimum of average ticket price.
 
 ```{r code_preliminary_4,message=FALSE}
@@ -79,6 +91,11 @@ table_theatre<-table(grosses$theatre)
 theatre_dataframe<-as.data.frame.array(table_theatre)%>%
   print()
 ```
+
 By the forth preliminary analysis, we analyzed the different theatres and their frequency.
+
+By the previous preliminary analysis, we found that there are a bulk of different theatres with different seat capacity; percent sold of seat capacity impacts average ticket price. The size of a theatre might be a variable which influences the relationship between percent sold of seat capacity and average ticket price. We are going to mutate the theatres into different categories by size and do visualization.
+
+Moreover, we are going to create a new column which shows how long does each show in each theatre run, by "mutate" function.
 
 To support our hypothesis before, we have to draw graphs of the variables  in the hypothesis correspondingly-- the positive correlation supports the hypothesis.
