@@ -95,7 +95,7 @@ reason causes the decrease later.
 
 ``` r
 grosses%>%
-  ggplot(aes(x=pct_capacity,y=avg_ticket_price))+
+  ggplot(aes(x=pct_capacity, y=avg_ticket_price))+
   geom_smooth()+
   labs(
     title="Influence of Theatre Seats Sold Percent",

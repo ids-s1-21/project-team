@@ -64,7 +64,7 @@ By the first preliminary visualization, we get a curve which increases first but
 
 ```{r code_preliminary_2,message=FALSE}
 grosses%>%
-  ggplot(aes(x=pct_capacity,y=avg_ticket_price))+
+  ggplot(aes(x=pct_capacity, y=avg_ticket_price))+
   geom_smooth()+
   labs(
     title="Influence of Theatre Seats Sold Percent",
