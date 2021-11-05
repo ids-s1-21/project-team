@@ -1,11 +1,14 @@
-# data
+# Data
 
-##Dimensions
+## Dimensions
 
 No. of variables: 14
+
 No. of observations: 47,524
 
-## name of data file
+## Name of Data File
+The source of the data and variable descriptions comes from TidyTuesday data set. 
+Obtained from: https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-28/readme.md
 
 - `week_ending`: Date of the end of the weekly measurement period. Always a Sunday.
 - `week_number`: Week number in the Broadway season. The season starts after the Tony Awards, held in early June. Some seasons have 53 weeks. 
