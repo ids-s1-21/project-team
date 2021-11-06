@@ -1,7 +1,7 @@
 ---
-title: "Presentation title"
-subtitle: <font size='6'>Presentation subtitle (if any)</font>
-author: <font size='8'>Team name <br> Names of team members</font>
+title: "Maximising Profits for Broadway Theatres"
+#subtitle: <font size='6'>Presentation subtitle (if any)</font>
+author: <font size='8'>team <br> Felix, Jeni, ____</font>
 institute: <font size='10'>University of Edinburgh</font>
 date: <font size = '6'>`r Sys.Date()`</font>
 output:
@@ -28,7 +28,9 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 # Load your data here
 ```
 
-## A statement of the overall goal / research question {data-background-image="img/confetti.jpg"}
+## Research Question {data-background-image="img/background.jpeg"}
+1.  What are the factors that can affect the average ticket price of a show? 
+2. How does average ticket price then influence the weekly gross revenue earned? 
 
 # Section title
 
