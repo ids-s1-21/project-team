@@ -24,6 +24,17 @@ your project.
 
 ## Presentation
 
+\#why mutate
+
+grosses%&gt;% ggplot(aes(x=seats\_in\_theatre))+ geom\_density()
+
+\#mutate
+
+grosses\_2&lt;-grosses%&gt;% mutate(theatre\_size=(case\_when(
+seats\_in\_theatre&lt;750 \~“small”, seats\_in\_theatre&lt;1300 &
+seats\_in\_theatre&gt;750 \~“median”, seats\_in\_theatre&gt;1299
+\~“large”) ) )
+
 Our presentation can be found [here](presentation/presentation.html).
 
 ## Data

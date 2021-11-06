@@ -24,6 +24,22 @@ Your results with proper output and graphics go in your presentation, this space
 ```
 
 ## Presentation
+#why mutate
+
+grosses%>%
+  ggplot(aes(x=seats_in_theatre))+
+  geom_density()
+
+  
+#mutate
+
+grosses_2<-grosses%>%
+  mutate(theatre_size=(case_when(
+    seats_in_theatre<750 ~"small",
+    seats_in_theatre<1300 & seats_in_theatre>750 ~"median",
+    seats_in_theatre>1299 ~"large")
+  )
+  )
 
 Our presentation can be found [here](presentation/presentation.html).
 
