@@ -33,7 +33,8 @@ using in our analysis include the following:
 4.  `avg_ticket_price`
 5.  `seats_sold`
 6.  `seat_capacity`
-7.  `performances`
+7.  `pct_capacity`
+8.  `performances`
 
 ## 2. Data
 
@@ -60,23 +61,27 @@ glimpse(grosses)
 
 ## 3. Data analysis plan
 
-In general, we set “weekly gross revenue” as the response Y, “average
-ticket price”, “seats sold”, and “number of performances per week” as
-the corresponding X. For further analysis, we consider “average ticket
-price” as the response Y, “seat capacity”, “name of theater”, “number of
-week being run” as the corresponding X, to more specifically figure out
-how each factors contribute to maximize weekly gross revenue.
+We set “weekly gross revenue” as the response Y, “average ticket price”,
+“seats sold”, and “number of performances per week” as the corresponding
+X. For further analysis, we consider “average ticket price” as the
+response Y, “seat capacity”, “name of theater”, “number of weeks being
+run” as the corresponding X, to more specifically figure out how each
+factors contribute to maximize weekly gross revenue.
 
-Our hypotheses are: Higher “average ticket price”, “percentage seats
-capacity”,“seats sold”, and “number of performances per week” lead to
-higher “gross weekly revenue”. More specifically, higher “seat capacity”
-and “number of week being run” can lead to higher “average ticket
-price”, and the type of “theater” matters as well.
+Our hypotheses are:
+
+1.  Higher “average ticket price”, “percentage seats capacity”,“seats
+    sold”, and “number of performances per week” lead to higher “gross
+    weekly revenue.”
+
+2.  More specifically, higher “seat capacity” and “number of week being
+    run” can lead to higher “average ticket price”, and the type of
+    “theater” matters as well.
 
 We will use inferential statistics method which helps show relationship
-and tendency of data. R visualization helps show the relationship and
-tendency.For example, to visualize the relation between “average ticket
-price” and “gross weekly revenue”, we use code:
+and tendency of data. R visualization will help show the relationship
+and tendency.For example, to visualize the relation between “average
+ticket price” and “gross weekly revenue”, we use code:
 
 ``` r
 grosses%>%
@@ -89,9 +94,9 @@ grosses%>%
 
 ![](proposal_files/figure-gfm/code_preliminary_1-1.png)<!-- -->
 
-By the first preliminary visualization, we get a curve which increases
+In the first preliminary visualization, we get a curve which increases
 first but decreases after price of 350. We are going to explore the
-reason causes the decrease later.
+reason that causes the decrease later.
 
 ``` r
 grosses%>%
@@ -106,9 +111,9 @@ grosses%>%
 
 ![](proposal_files/figure-gfm/code_preliminary_2-1.png)<!-- -->
 
-By the second preliminary visualization, we get a curve with increasing
-trend which implies higher percent of theatre seats sold causes higher
-average ticket price.
+In the second preliminary visualization, we get a curve with an
+increasing trend which implies higher percent of theatre seats sold
+causes higher average ticket price.
 
 ``` r
 preliminary_analysis<-grosses%>%
@@ -124,7 +129,7 @@ preliminary_analysis<-grosses%>%
     ##            <dbl>            <dbl>         <dbl>         <dbl>
     ## 1           67.9             60.2          512.             0
 
-By the third preliminary analysis, we analyzed median, average, maximum
+In the third preliminary analysis, we analyzed median, average, maximum
 and minimum of average ticket price.
 
 ``` r
@@ -193,19 +198,20 @@ theatre_dataframe<-as.data.frame.array(table_theatre)%>%
     ## Walter Kerr Theatre                          1037
     ## Winter Garden Theatre                        1055
 
-By the forth preliminary analysis, we analyzed the different theatres
+In the forth preliminary analysis, we analyzed the different theatres
 and their frequency.
 
-By the previous preliminary analysis, we found that there are a bulk of
-different theatres with different seat capacity; percent sold of seat
+With the previous preliminary analysis, we found that there are a bulk
+of different theatres with different seat capacity; percent sold of seat
 capacity impacts average ticket price. The size of a theatre might be a
 variable which influences the relationship between percent sold of seat
-capacity and average ticket price. We are going to mutate the theatres
-into different categories by size and do visualization.
+capacity and average ticket price. Hence, we are going to mutate the
+theatres into different categories by size and do a visualization to
+explore the relationship further.
 
-Moreover, we are going to create a new column which shows how long does
-each show in each theatre run, by “mutate” function.
+Moreover, we are going to create a new column which shows how long each
+show in runs in each theatre, by using the “mutate” function.
 
-To support our hypothesis before, we have to draw graphs of the
-variables in the hypothesis correspondingly– the positive correlation
-supports the hypothesis.
+To support our hypothesis, as mentioned previously, we have to draw
+graphs of the variables in the hypothesis correspondingly – the positive
+correlation supports the hypothesis.
