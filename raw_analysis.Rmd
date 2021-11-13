@@ -12,7 +12,7 @@ grosses%>%
 grosses_size <- grosses%>%
   mutate(theatre_size=(case_when(
     seats_in_theatre<750 ~"small",
-    seats_in_theatre<1300 & seats_in_theatre>750 ~"median",
+    seats_in_theatre<1300 & seats_in_theatre>750 ~"medium",
     seats_in_theatre>1299 ~"large")
   )
   )
