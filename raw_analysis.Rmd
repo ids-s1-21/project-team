@@ -2,6 +2,11 @@
 title: "raw_analysis"
 output: html_document
 ---
+```{r density_theatre}
+grosses%>%
+  ggplot(aes(x=seats_in_theatre))+
+  geom_density()
+```
 
 ```{r mutate}
 grosses_size <- grosses%>%
