@@ -24,3 +24,12 @@ grosses_size <- grosses%>%
 ________________________________________________________________________
 
 #Felix No. 2
+```{r mutate week}
+counting<-grosses_size%>%
+  group_by(theatre)%>%
+  group_by(show)%>%
+  mutate(theatre_show=paste0(theatre,show))%>%
+  group_by(theatre_show)%>%
+  mutate(week_running=n())
+```
+
