@@ -1,14 +1,16 @@
 ---
 title: "raw_analysis"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
-```{r density_theatre}
+```{r density-theatre}
 grosses%>%
   ggplot(aes(x=seats_in_theatre))+
   geom_density()
 ```
 
-```{r mutate}
+```{r mutate-size}
 grosses_size <- grosses%>%
   mutate(theatre_size=(case_when(
     seats_in_theatre<750 ~"small",
@@ -20,6 +22,43 @@ grosses_size <- grosses%>%
 
 #Jeni No. 1
 
+```{r weekly-gross-frequency}
+grosses %>% 
+  ggplot(aes(x = weekly_gross)) + 
+  geom_histogram(stat_bin = 100) +
+  labs(
+    title = "Frequency of Theatres by Weekly Gross Revenue",
+    x = "Weekly Gross Revenue ($)", 
+    y = "Frequency"
+  ) +
+  scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+```{r avgprice-weeklygross}
+grosses %>%
+  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
+       x = "Average Ticket Price",
+       y = "Gross Weekly Revenue") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+```{r model-avgprice-weeklygross}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(weekly_gross ~ log(avg_ticket_price), data = grosses)
+```
+
+```{r pctcapacity-weeklygross}
+grosses %>% 
+  ggplot(aes(x = pct_capacity, y = weekly_gross)) + 
+  geom_smooth(se = FALSE) +
+  labs(title = "Percentage of capacity and Weekly Gross Revenue", 
+       y = "Gross Weekly Revenue", 
+       x = "Percentage of Seats at Capacity") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
 
 ________________________________________________________________________
 
