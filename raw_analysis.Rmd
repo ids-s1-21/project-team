@@ -82,11 +82,30 @@ improved<-aggregate(data=week_running_improved,
 
 ```{r }
 improved%>%
+  filter(week_running<500)%>%
   ggplot(aes(x=week_running,y=x))+
   geom_smooth(se = FALSE)+
   labs(title = "Relaionship Between Week Running and Average Ticket Price",
        x = "Week Running",
        y = "Average Ticket Price")
+```
+
+```{r}
+
+improved%>%
+  ggplot(aes(x=week_running))+
+  geom_density()
+
+
+improved_2<-improved%>%
+  filter(week_running<150)
+
+linear_reg_week_running<-
+  linear_reg()%>%
+  set_engine("lm")%>%
+  fit(week_running ~ x,data=improved_2)
+
+tidy(linear_reg_week_running)
 ```
 
 ```{r }
@@ -97,3 +116,5 @@ counting%>%
        x = "Seat Capacity",
        y = "Average Ticket Price")
 ```
+
+
