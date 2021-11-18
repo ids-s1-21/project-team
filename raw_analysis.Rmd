@@ -97,7 +97,7 @@ improved%>%
 
 
 improved_2<-improved%>%
-  filter(week_running<150)
+  filter(week_running<500)
 
 improved_2%>%
   ggplot(aes(x=week_running,y=x))+
