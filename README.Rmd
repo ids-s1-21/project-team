@@ -1,6 +1,6 @@
 ---
-title: Project title
-author: by Team name
+title: Maximising Profits for Broadway Theatres
+author: team
 output: github_document
 ---
 
