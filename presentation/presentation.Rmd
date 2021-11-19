@@ -7,6 +7,8 @@ date: <font size = '6'>`r Sys.Date()`</font>
 output:
   revealjs::revealjs_presentation:
     self_contained: false
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r load-packages, include = FALSE}
@@ -26,6 +28,11 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 
 ```{r load-data, include=FALSE}
 # Load your data here
+grosses <- read_csv("data/grosses.csv")
+```
+
+```{r data}
+glimpse(grosses)
 ```
 
 ## Research Question {data-background-image="img/background.jpeg"}
