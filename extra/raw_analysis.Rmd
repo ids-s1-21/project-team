@@ -37,7 +37,7 @@ grosses %>%
 ```{r avgprice-weeklygross}
 grosses %>%
   ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
-  geom_smooth(se = FALSE) +
+  geom_point() +
   labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
        x = "Average Ticket Price",
        y = "Gross Weekly Revenue") +
@@ -45,9 +45,21 @@ grosses %>%
 ```
 
 ```{r model-avgprice-weeklygross}
+grosses_log <- grosses%>%
+  mutate(
+    price_log = log(avg_ticket_price + 0.00001),
+    gross_log = log(weekly_gross + 0.00001)
+  )
+
+grosses_log %>%
+  ggplot(aes(x = price_log, y = gross_log)) +
+  geom_point()
+
 linear_reg() %>%
   set_engine("lm") %>%
-  fit(weekly_gross ~ log(avg_ticket_price), data = grosses)
+  fit(gross_log ~ price_log + pct_capacity, 
+      data = grosses_log) %>%
+  tidy()
 ```
 
 ```{r pctcapacity-weeklygross}
