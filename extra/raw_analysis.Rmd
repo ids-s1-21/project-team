@@ -69,4 +69,58 @@ counting<-grosses_size%>%
   group_by(theatre_show)%>%
   mutate(week_running=n())
 ```
+```{r week running}
+week_running_improved <- counting%>%
+  summarise(avg_ticket_price,theatre_show,week_running)
+
+improved<-aggregate(data=week_running_improved,
+            week_running_improved$avg_ticket_price,
+            by=list(theatre_show=week_running_improved$theatre_show,
+                    week_running=week_running_improved$week_running), 
+            FUN=mean)
+```
+
+```{r }
+improved%>%
+  ggplot(aes(x=week_running,y=x))+
+  geom_smooth(se = FALSE)+
+  labs(title = "Relaionship Between Week Running and Average Ticket Price",
+       x = "Week Running",
+       y = "Average Ticket Price")
+```
+
+```{r}
+
+improved%>%
+  ggplot(aes(x=week_running))+
+  geom_density()
+
+
+improved_2<-improved%>%
+  filter(week_running<500)
+
+improved_2%>%
+  ggplot(aes(x=week_running,y=x))+
+  geom_smooth(se = FALSE)+
+  labs(title = "Relaionship Between Week Running and Average Ticket Price",
+       x = "Week Running",
+       y = "Average Ticket Price")
+
+linear_reg_week_running<-
+  linear_reg()%>%
+  set_engine("lm")%>%
+  fit(week_running ~ x,data=improved_2)
+
+tidy(linear_reg_week_running)
+```
+
+```{r }
+counting%>%
+  ggplot(aes(x=seats_in_theatre,y=avg_ticket_price,color=theatre_size))+
+  geom_smooth(se = FALSE)+
+  labs(title = "Relationship Between Theatre Size and Average Ticket Price",
+       x = "Seat Capacity",
+       y = "Average Ticket Price")
+```
+
 
