@@ -93,11 +93,12 @@ improved%>%
 
 improved%>%
   ggplot(aes(x=week_running))+
-  geom_density()
+  geom_density()+
+  geom_vline(xintercept=375)
 
 
 improved_2<-improved%>%
-  filter(week_running<500)
+  filter(week_running<375)
 
 improved_2%>%
   ggplot(aes(x=week_running,y=x))+
