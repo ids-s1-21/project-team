@@ -81,6 +81,7 @@ counting<-grosses_size%>%
   group_by(theatre_show)%>%
   mutate(week_running=n())
 ```
+
 ```{r week running}
 week_running_improved <- counting%>%
   summarise(avg_ticket_price,theatre_show,week_running)
@@ -136,4 +137,28 @@ counting%>%
        y = "Average Ticket Price")
 ```
 
+
+
+```{r model}
+grosses1$avg_ticket_price2<-grosses1$avg_ticket_price^2
+grosses1%>%
+  ggplot(aes(x=avg_ticket_price,y=weekly_gross))+
+  geom_smooth()
+
+quadratic_model<-
+  lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
+       grosses1$avg_ticket_price2,
+     data=grosses1)
+summary(quadratic_model)
+
+
+grosses1$avg_ticket_price1=1/grosses1$avg_ticket_price
+  
+  improved_model<-
+  lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
+       grosses1$avg_ticket_price2 +
+       grosses1$avg_ticket_price1,
+     data=grosses1)
+summary(improved_model)  
+```
 
