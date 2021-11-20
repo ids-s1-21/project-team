@@ -57,7 +57,7 @@ grosses_log %>%
 
 linear_reg() %>%
   set_engine("lm") %>%
-  fit(gross_log ~ price_log + pct_capacity, 
+  fit(gross_log ~ price_log, 
       data = grosses_log) %>%
   tidy()
 ```
