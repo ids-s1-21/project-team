@@ -46,6 +46,14 @@ grosses %>%
        x = "Average Ticket Price",
        y = "Gross Weekly Revenue") +
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+
+grosses %>%
+  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
+       x = "Average Ticket Price",
+       y = "Gross Weekly Revenue") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
 ```{r model-avgprice-weeklygross}
@@ -67,12 +75,22 @@ linear_reg() %>%
 ```
 
 ```{r pctcapacity-weeklygross}
+<<<<<<< HEAD
 grosses %>% 
   ggplot(aes(x = pct_capacity, y = weekly_gross)) + 
   geom_point() +
   labs(title = "Percentage of capacity and Weekly Gross Revenue", 
        y = "Gross Weekly Revenue", 
        x = "Percentage of Seats at Capacity") +
+=======
+counting %>% 
+  ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
+  geom_point(alpha = 0.5) +
+  labs(title = "Percentage of Seats Capacity Sold and Weekly Gross Revenue", 
+       y = "Weekly Gross Revenue", 
+       x = "Percentage of Seats Capacity Sold",
+       color = "Theatre Size") +
+>>>>>>> b6ab7181f29e1254015f4366374e97459dc71e8c
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
@@ -85,6 +103,7 @@ counting<-grosses_size%>%
   group_by(theatre_show)%>%
   mutate(week_running=n())
 ```
+
 ```{r week running}
 week_running_improved <- counting%>%
   summarise(avg_ticket_price,theatre_show,week_running)
@@ -140,4 +159,28 @@ counting%>%
        y = "Average Ticket Price")
 ```
 
+
+
+```{r model}
+grosses1$avg_ticket_price2<-grosses1$avg_ticket_price^2
+grosses1%>%
+  ggplot(aes(x=avg_ticket_price,y=weekly_gross))+
+  geom_smooth()
+
+quadratic_model<-
+  lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
+       grosses1$avg_ticket_price2,
+     data=grosses1)
+summary(quadratic_model)
+
+
+grosses1$avg_ticket_price1=1/grosses1$avg_ticket_price
+  
+  improved_model<-
+  lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
+       grosses1$avg_ticket_price2 +
+       grosses1$avg_ticket_price1,
+     data=grosses1)
+summary(improved_model)  
+```
 
