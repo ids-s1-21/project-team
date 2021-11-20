@@ -65,19 +65,6 @@ grosses %>%
   scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
 ```
 
-## MAIN QUESTION: Average Price vs Weekly Gross
-
-```{r avg-price-weekly-gross, message = FALSE, warning = FALSE, echo = FALSE}
-grosses %>%
-  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
-  geom_point() +
-  geom_smooth(se = FALSE) +
-  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
-       x = "Average Ticket Price",
-       y = "Gross Weekly Revenue") +
-  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
-```
-
 ## MUTATE Theatre Size
 ```{r mutate-theatre-size, message = FALSE, warning = FALSE}
 grosses_size <- grosses %>%
@@ -90,6 +77,7 @@ grosses_size <- grosses %>%
 ```
 
 ## Gross Weekly Revenue
+
 ```{r weekly-gross-frequency-theatre-size, warning = FALSE, message = FALSE, echo = FALSE}
 grosses_size %>% 
   filter(theatre_size != is.na(theatre_size)) %>%
@@ -104,7 +92,51 @@ grosses_size %>%
   scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
 ```
 
+## Percentage Capacity vs Weekly Gross
 
+```{r counting, warning = FALSE, message = FALSE}
+counting <- grosses_size %>%
+  mutate(theatre_show = paste0(theatre, show)) %>%
+  group_by(theatre_show) %>%
+  mutate(week_running = n())
+```
+
+```{r summary-stats, warning = FALSE, message = FALSE, echo = FALSE}
+week_running_improved <- counting %>%
+  summarise(avg_ticket_price, theatre_show, week_running)
+
+improved <- aggregate(data = week_running_improved,
+            week_running_improved$avg_ticket_price,
+            by = list(theatre_show = week_running_improved$theatre_show,
+                    week_running = week_running_improved$week_running), 
+            FUN = mean)
+```
+
+## Percentage Capacity and Weekly Gross
+
+```{r pctcapacity-weeklygross, warning = FALSE, message = FALSE, echo = FALSE}
+counting %>% 
+  ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
+  geom_point(alpha = 0.5) +
+  labs(title = "Percentage of Seats Capacity Sold and Weekly Gross Revenue", 
+       y = "Weekly Gross Revenue", 
+       x = "Percentage of Seats Capacity Sold",
+       color = "Theatre Size") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+## MAIN QUESTION: Average Price vs Weekly Gross
+
+```{r avg-price-weekly-gross1, message = FALSE, warning = FALSE, echo = FALSE}
+grosses %>%
+  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
+       x = "Average Ticket Price",
+       y = "Gross Weekly Revenue") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
 
 # Hello World
 
