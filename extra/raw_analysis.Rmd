@@ -42,6 +42,14 @@ grosses %>%
        x = "Average Ticket Price",
        y = "Gross Weekly Revenue") +
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+
+grosses %>%
+  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
+       x = "Average Ticket Price",
+       y = "Gross Weekly Revenue") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
 ```{r model-avgprice-weeklygross}
