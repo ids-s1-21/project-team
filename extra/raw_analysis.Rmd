@@ -75,14 +75,6 @@ linear_reg() %>%
 ```
 
 ```{r pctcapacity-weeklygross}
-<<<<<<< HEAD
-grosses %>% 
-  ggplot(aes(x = pct_capacity, y = weekly_gross)) + 
-  geom_point() +
-  labs(title = "Percentage of capacity and Weekly Gross Revenue", 
-       y = "Gross Weekly Revenue", 
-       x = "Percentage of Seats at Capacity") +
-=======
 counting %>% 
   ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
   geom_point(alpha = 0.5) +
@@ -90,7 +82,6 @@ counting %>%
        y = "Weekly Gross Revenue", 
        x = "Percentage of Seats Capacity Sold",
        color = "Theatre Size") +
->>>>>>> b6ab7181f29e1254015f4366374e97459dc71e8c
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
