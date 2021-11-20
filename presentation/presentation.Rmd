@@ -38,7 +38,7 @@ glimpse(grosses)
 
 ## Research Question {data-background-image="img/background.jpeg"}
 1.  What are the factors that can affect the average ticket price of a show? 
-2. How does average ticket price then influence the weekly gross revenue earned? 
+2. Hence, how does average ticket price then influence the weekly gross revenue earned? 
 
 # Section title
 
