@@ -85,6 +85,12 @@ counting %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
+```{r performances-weeklygross}
+grosses %>%
+  ggplot(aes(x = performances, y = weekly_gross))+
+  geom_jitter()
+```
+
 ________________________________________________________________________
 
 #Felix No. 2
