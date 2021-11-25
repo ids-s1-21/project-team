@@ -5,13 +5,13 @@ editor_options:
   chunk_output_type: console
 ---
 ```{r density-theatre}
-grosses%>%
+grosses %>%
   ggplot(aes(x=seats_in_theatre))+
   geom_density()
 ```
 
 ```{r mutate-size}
-grosses_size <- grosses%>%
+grosses_size <- grosses %>%
   mutate(theatre_size=(case_when(
     seats_in_theatre<750 ~"small",
     seats_in_theatre<1300 & seats_in_theatre>750 ~"medium",
@@ -23,21 +23,33 @@ grosses_size <- grosses%>%
 #Jeni No. 1
 
 ```{r weekly-gross-frequency}
-grosses %>% 
-  ggplot(aes(x = weekly_gross)) + 
-  geom_histogram(stat_bin = 100) +
+grosses_size %>% 
+  filter(theatre_size != is.na(theatre_size)) %>%
+  ggplot(aes(x = weekly_gross, fill = theatre_size)) + 
+  geom_histogram() +
   labs(
     title = "Frequency of Theatres by Weekly Gross Revenue",
     x = "Weekly Gross Revenue ($)", 
-    y = "Frequency"
+    y = "Frequency",
+    fill = "Size of Theatre"
   ) +
-  scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+  scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
+  
 ```
 
 ```{r avgprice-weeklygross}
 grosses %>%
   ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
   geom_point() +
+  geom_smooth(se = FALSE) +
+  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
+       x = "Average Ticket Price",
+       y = "Gross Weekly Revenue") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+
+grosses %>%
+  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
+  geom_smooth(se = FALSE) +
   labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
        x = "Average Ticket Price",
        y = "Gross Weekly Revenue") +
@@ -71,6 +83,12 @@ counting %>%
        x = "Percentage of Seats Capacity Sold",
        color = "Theatre Size") +
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+```{r performances-weeklygross}
+grosses %>%
+  ggplot(aes(x = performances, y = weekly_gross))+
+  geom_jitter()
 ```
 
 ________________________________________________________________________

@@ -32,15 +32,111 @@ setwd("/cloud/project/")
 grosses <- read_csv("data/grosses.csv")
 ```
 
+# Dataset
+
+- Tidy Tuesday project file
+- Compiled from Playbill, a magazine for theatres
+- Information on weekly grosses, average ticket price, etc of different theatre shows
+- 14 variables, 47,524 observations
+
+# Dataset 
+
 ```{r data}
 glimpse(grosses)
 ```
 
-## Research Question {data-background-image="img/background.jpeg"}
-1.  What are the factors that can affect the average ticket price of a show? 
-2. Hence, how does average ticket price then influence the weekly gross revenue earned? 
+## Research Question 
 
-# Section title
+1.  What are the factors that can affect the average ticket price of a show? 
+2. **Hence, how does average ticket price then influence the weekly gross revenue earned?**
+
+## Gross Weekly Revenue
+
+```{r weekly-gross-frequency, warning = FALSE, message = FALSE, echo = FALSE}
+grosses %>% 
+  ggplot(aes(x = weekly_gross)) + 
+  geom_histogram() +
+  labs(
+    title = "Frequency of Theatres by Weekly Gross Revenue",
+    x = "Weekly Gross Revenue ($)", 
+    y = "Frequency",
+    fill = "Size of Theatre"
+  ) +
+  scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
+```
+
+## MUTATE Theatre Size
+```{r mutate-theatre-size, message = FALSE, warning = FALSE}
+grosses_size <- grosses %>%
+  mutate(theatre_size = (case_when(
+    seats_in_theatre < 750 ~ "small",
+    seats_in_theatre < 1300 & seats_in_theatre > 750 ~ "medium",
+    seats_in_theatre > 1299 ~ "large")
+  )
+  )
+```
+
+## Gross Weekly Revenue
+
+```{r weekly-gross-frequency-theatre-size, warning = FALSE, message = FALSE, echo = FALSE}
+grosses_size %>% 
+  filter(theatre_size != is.na(theatre_size)) %>%
+  ggplot(aes(x = weekly_gross, fill = theatre_size)) + 
+  geom_histogram() +
+  labs(
+    title = "Frequency of Theatres by Weekly Gross Revenue",
+    x = "Weekly Gross Revenue ($)", 
+    y = "Frequency",
+    fill = "Size of Theatre"
+  ) +
+  scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
+```
+
+## Percentage Capacity vs Weekly Gross
+
+```{r counting, warning = FALSE, message = FALSE}
+counting <- grosses_size %>%
+  mutate(theatre_show = paste0(theatre, show)) %>%
+  group_by(theatre_show) %>%
+  mutate(week_running = n())
+```
+
+```{r summary-stats, warning = FALSE, message = FALSE, echo = FALSE}
+week_running_improved <- counting %>%
+  summarise(avg_ticket_price, theatre_show, week_running)
+
+improved <- aggregate(data = week_running_improved,
+            week_running_improved$avg_ticket_price,
+            by = list(theatre_show = week_running_improved$theatre_show,
+                    week_running = week_running_improved$week_running), 
+            FUN = mean)
+```
+
+## Percentage Capacity and Weekly Gross
+
+```{r pctcapacity-weeklygross, warning = FALSE, message = FALSE, echo = FALSE}
+counting %>% 
+  ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
+  geom_point(alpha = 0.5) +
+  labs(title = "Percentage of Seats Capacity Sold and Weekly Gross Revenue", 
+       y = "Weekly Gross Revenue", 
+       x = "Percentage of Seats Capacity Sold",
+       color = "Theatre Size") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+## MAIN QUESTION: Average Price vs Weekly Gross
+
+```{r avg-price-weekly-gross1, message = FALSE, warning = FALSE, echo = FALSE}
+grosses %>%
+  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
+       x = "Average Ticket Price",
+       y = "Gross Weekly Revenue") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
 
 # Hello World
 
@@ -55,6 +151,8 @@ It's possible to have a horizontal sliding transition as well as nest multiple s
 When presenting, you use the left/right arrows to step through the top-level (horizontal) slides. When you arrive at a vertical stack you can optionally press the up/down arrows to view the vertical slides or skip past them by pressing the right arrow.
 
 (click the down key now)
+
+
 
 ## reveal.js
 
