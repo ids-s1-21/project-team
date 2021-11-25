@@ -51,7 +51,6 @@ grosses_size <- grosses %>%
   )
 ```
 
---------------------------------------------------------------------------
 ### Frequency--Weekly Gross Revenue
 ```{r weekly-gross-frequency, message = FALSE, echo = FALSE}
 grosses_size %>% 
@@ -70,44 +69,19 @@ grosses_size %>%
 
 From the graph, most theatres have a weekly gross revenue between $0.4M and $1M, and the data trend goes the same as that in reality, with a very low frequency around 0 revenue, and later on as the revenue gets higher, the frequency becomes lower. More specifically, considering the size of the theatres, the ones with size small have a highest revenue of $0.7M, far lower than that of the medium and large ones. Besides, comparing the area of colors, we can see that most medium-sized theatres have a weekly gross revenue between $0.2 to $0.5, while most of the large ones have a value between $0.4 to $0.6, which is slightly higher. Let's look at more plots below to further discover the influence of theatre size.
 
-```{r avgprice-weeklygross, echo = FALSE}
+```{r avgprice-weeklygross, message = FALSE, echo = FALSE}
 grosses %>%
   ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
   geom_point() +
   geom_smooth(se = FALSE) +
-  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
+  labs(title = "Relationship Between Average Ticket Price and Weekly Gross Revenue",
        x = "Average Ticket Price",
-       y = "Gross Weekly Revenue") +
-  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
-
-grosses %>%
-  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
-  geom_smooth(se = FALSE) +
-  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
-       x = "Average Ticket Price",
-       y = "Gross Weekly Revenue") +
+       y = "Weekly Gross Revenue") +
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-```{r model-avgprice-weeklygross}
-grosses_log <- grosses%>%
-  mutate(
-    price_log = log(avg_ticket_price + 0.00001),
-    gross_log = log(weekly_gross + 0.00001)
-  )
-
-grosses_log %>%
-  ggplot(aes(x = price_log, y = gross_log)) +
-  geom_point()
-
-linear_reg() %>%
-  set_engine("lm") %>%
-  fit(gross_log ~ price_log, 
-      data = grosses_log) %>%
-  tidy()
-```
-
-```{r pctcapacity-weeklygross}
+### Weekly Gross Revenue--Percentage of Seats Capacity Sold
+```{r pctcapacity-weeklygross, message = FALSE, echo = FALSE}
 counting %>% 
   ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
   geom_point(alpha = 0.5) +
@@ -118,15 +92,22 @@ counting %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-```{r performances-weeklygross}
-grosses %>%
+This plot reveals the fact that higher percentage of seats capacity sold leads to higher weekly gross revenue. The distribution of colors, that red is above green, and green is above blue, demonstrate that under same percentage, theatres with larger size will have higher weekly gross revenue. This is the same as we expected, since the total number of seats is higher in larger theatres.
+
+### Weekly Gross Revenue--Performances
+```{r performances-weeklygross, message = FALSE, echo = FALSE}
+counting %>%
   ggplot(aes(x = performances, y = weekly_gross))+
-  geom_jitter()
+  geom_jitter()+
+  labs(x = "Number of Performances per Week", y = "Weekly Gross Revenue",
+       title = "Weekly Gross Revenue and Number of Performances per Week")+
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-________________________________________________________________________
+This graph shows that some of the highest weekly gross revenue appear when the number of performances is 8 or 9. However, the graph doesn't indicate any relationship between weekly revenue and number of performances since the data are randomly disbributed without any pattern (that is, theatres with low number of performances per week can have high weekly revenue, while those with high number of performances per week may receive revenue not as high). 
 
-#Felix No. 2
+
+------------------------------------------------------------------------------
 ```{r mutate week}
 counting<-grosses_size%>%
   mutate(theatre_show=paste0(theatre,show))%>%
