@@ -122,6 +122,8 @@ improved%>%
 ```
 
 ```{r}
+grosses1<-grosses%>%
+  filter(!avg_ticket_price==0)
 
 improved%>%
   ggplot(aes(x=week_running))+
@@ -160,6 +162,7 @@ counting%>%
 
 ```{r model}
 grosses1$avg_ticket_price2<-grosses1$avg_ticket_price^2
+
 grosses1%>%
   ggplot(aes(x=avg_ticket_price,y=weekly_gross))+
   geom_smooth()+
@@ -174,7 +177,7 @@ summary(quadratic_model)
 
 grosses1$avg_ticket_price1=1/grosses1$avg_ticket_price
   
-  improved_model<-
+improved_model<-
   lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
        grosses1$avg_ticket_price2 +
        grosses1$avg_ticket_price1,
@@ -202,6 +205,6 @@ glimpse(test_data)
 grosses_fit<-linear_reg()%>%
   set_engine("lm")%>%
   fit(gross_log ~ ., data = train_data)
-predict(grosses_fit,test_data)
+predict(object = grosses_fit, new_data = test_data)
 ```
 
