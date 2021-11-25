@@ -179,13 +179,8 @@ summary(quadratic_model)
 
 grosses1$avg_ticket_price1=1/grosses1$avg_ticket_price
   
-<<<<<<< HEAD
   improved_model<-
     lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
-=======
-improved_model<-
-  lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
->>>>>>> 73e168ed9b6635cca5d6ddef3c4ba0e65550f517
        grosses1$avg_ticket_price2 +
        grosses1$avg_ticket_price1,
      data=grosses1)
