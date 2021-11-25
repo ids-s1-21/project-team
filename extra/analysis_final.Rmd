@@ -1,18 +1,47 @@
 ---
-title: "raw_analysis"
+title: "Analysis"
 output:
-  pdf_document: default
-  html_document: default
+pdf_document: default
+html_document: default
 editor_options:
-  chunk_output_type: console
+chunk_output_type: console
 ---
-```{r density-theatre}
-grosses %>%
-  ggplot(aes(x=seats_in_theatre))+
-  geom_density()
+```{r load-packages, message = FALSE, echo = FALSE}
+library(tidyverse)
+library(tidymodels)
+library(broom)
+library(tidytuesdayR)
+library(scales)
 ```
 
-```{r mutate-size}
+```{r read-grosses, message = FALSE, echo = FALSE}
+grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
+
+grosses_size <- grosses %>%
+  mutate(theatre_size = (case_when(
+    seats_in_theatre < 750 ~ "small",
+    seats_in_theatre < 1300 & seats_in_theatre > 750 ~ "medium",
+    seats_in_theatre > 1299 ~ "large")
+  ))
+
+counting <- grosses_size %>%
+  mutate(theatre_show = paste0(theatre, show)) %>%
+  group_by(theatre_show) %>%
+  mutate(week_running = n())
+
+
+```
+
+### Density--Seats in Theatre
+```{r density-theatre, echo = FALSE}
+ggplot(grosses, aes(x=seats_in_theatre))+
+  geom_density()+
+  labs(x = "Seats in Theatre", y = "Density")
+```
+
+As this graph reveals, the seat capacity varies in different theatres. The size of a theatre might be a factor which influences the relationship between variables. Therefore, we mutate the theatres into different categories based on theatre size and do visualizations to further explore the relationship.
+
+```{r mutate-size, echo = FALSE}
 grosses_size <- grosses %>%
   mutate(theatre_size=(case_when(
     seats_in_theatre<750 ~"small",
@@ -22,9 +51,9 @@ grosses_size <- grosses %>%
   )
 ```
 
-#Jeni No. 1
-
-```{r weekly-gross-frequency}
+--------------------------------------------------------------------------
+### Frequency--Weekly Gross Revenue
+```{r weekly-gross-frequency, message = FALSE, echo = FALSE}
 grosses_size %>% 
   filter(theatre_size != is.na(theatre_size)) %>%
   ggplot(aes(x = weekly_gross, fill = theatre_size)) + 
@@ -39,7 +68,9 @@ grosses_size %>%
   
 ```
 
-```{r avgprice-weeklygross}
+From the graph, most theatres have a weekly gross revenue between $0.4M and $1M, and the data trend goes the same as that in reality, with a very low frequency around 0 revenue, and later on as the revenue gets higher, the frequency becomes lower. More specifically, considering the size of the theatres, the ones with size small have a highest revenue of $0.7M, far lower than that of the medium and large ones. Besides, comparing the area of colors, we can see that most medium-sized theatres have a weekly gross revenue between $0.2 to $0.5, while most of the large ones have a value between $0.4 to $0.6, which is slightly higher. Let's look at more plots below to further discover the influence of theatre size.
+
+```{r avgprice-weeklygross, echo = FALSE}
 grosses %>%
   ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
   geom_point() +
@@ -158,28 +189,5 @@ counting%>%
        y = "Average Ticket Price")
 ```
 
-
-
-```{r model}
-grosses1$avg_ticket_price2<-grosses1$avg_ticket_price^2
-grosses1%>%
-  ggplot(aes(x=avg_ticket_price,y=weekly_gross))+
-  geom_smooth()
-
-quadratic_model<-
-  lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
-       grosses1$avg_ticket_price2,
-     data=grosses1)
-summary(quadratic_model)
-
-
-grosses1$avg_ticket_price1=1/grosses1$avg_ticket_price
-  
-  improved_model<-
-    lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
-       grosses1$avg_ticket_price2 +
-       grosses1$avg_ticket_price1,
-     data=grosses1)
-summary(improved_model)  
-```
+r quadratic model
 
