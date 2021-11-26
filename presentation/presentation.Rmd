@@ -1,7 +1,7 @@
 ---
 title: "Maximising Profits for Broadway Theatres"
 #subtitle: <font size='6'>Presentation subtitle (if any)</font>
-author: <font size='8'>team <br> Felix, Jeni, ____</font>
+author: <font size='8'>team <br> Felix, Jeni, Janet</font>
 institute: <font size='10'>University of Edinburgh</font>
 date: <font size = '6'>`r Sys.Date()`</font>
 output:
@@ -45,12 +45,12 @@ grosses <- read_csv("data/grosses.csv")
 glimpse(grosses)
 ```
 
-## Research Question 
+# Research Question 
 
 1.  What are the factors that can affect the average ticket price of a show? 
-2. **Hence, how does average ticket price then influence the weekly gross revenue earned?**
+2. Hence, how does average ticket price then influence the weekly gross revenue earned?
 
-## Gross Weekly Revenue
+# Gross Weekly Revenue
 
 ```{r weekly-gross-frequency, warning = FALSE, message = FALSE, echo = FALSE}
 grosses %>% 
@@ -65,7 +65,7 @@ grosses %>%
   scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
 ```
 
-## MUTATE Theatre Size
+# MUTATE Theatre Size
 ```{r mutate-theatre-size, message = FALSE, warning = FALSE}
 grosses_size <- grosses %>%
   mutate(theatre_size = (case_when(
@@ -76,7 +76,7 @@ grosses_size <- grosses %>%
   )
 ```
 
-## Gross Weekly Revenue
+# Gross Weekly Revenue
 
 ```{r weekly-gross-frequency-theatre-size, warning = FALSE, message = FALSE, echo = FALSE}
 grosses_size %>% 
@@ -92,7 +92,7 @@ grosses_size %>%
   scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
 ```
 
-## Percentage Capacity vs Weekly Gross
+# Percentage Capacity vs Weekly Gross
 
 ```{r counting, warning = FALSE, message = FALSE}
 counting <- grosses_size %>%
@@ -112,7 +112,7 @@ improved <- aggregate(data = week_running_improved,
             FUN = mean)
 ```
 
-## Percentage Capacity and Weekly Gross
+# Percentage Capacity and Weekly Gross
 
 ```{r pctcapacity-weeklygross, warning = FALSE, message = FALSE, echo = FALSE}
 counting %>% 
@@ -125,7 +125,7 @@ counting %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-## MAIN QUESTION: Average Price vs Weekly Gross
+<p style="font-size:20px"># Main Question: Average Price vs Weekly Gross </p>
 
 ```{r avg-price-weekly-gross1, message = FALSE, warning = FALSE, echo = FALSE}
 grosses %>%
@@ -143,6 +143,8 @@ grosses %>%
 - Click the `Knit` button to compile your presentation
 
 - Make sure to commit and push all resulting files to your GitHub repo
+
+<p style="font-family:verdana">This is a paragraph.</p>
 
 # Using reveal.js
 
