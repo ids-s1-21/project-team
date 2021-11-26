@@ -1,0 +1,199 @@
+---
+title: "Analysis"
+output:
+pdf_document: default
+html_document: default
+editor_options:
+chunk_output_type: console
+---
+```{r load-packages, message = FALSE, echo = FALSE}
+library(tidyverse)
+library(tidymodels)
+library(broom)
+library(tidytuesdayR)
+library(scales)
+```
+
+```{r read-grosses, message = FALSE, echo = FALSE}
+grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
+
+grosses_size <- grosses %>%
+  mutate(theatre_size = (case_when(
+    seats_in_theatre < 750 ~ "small",
+    seats_in_theatre < 1300 & seats_in_theatre > 750 ~ "medium",
+    seats_in_theatre > 1299 ~ "large")
+  ))
+
+counting <- grosses_size %>%
+  mutate(theatre_show = paste0(theatre, show)) %>%
+  group_by(theatre_show) %>%
+  mutate(week_running = n())
+
+
+```
+
+### Density--Seats in Theatre
+```{r density-theatre, echo = FALSE}
+ggplot(grosses, aes(x=seats_in_theatre))+
+  geom_density()+
+  labs(x = "Seats in Theatre", y = "Density")
+```
+
+As this graph reveals, the seat capacity varies in different theatres. The size of a theatre might be a factor which influences the relationship between variables. Therefore, we mutate the theatres into different categories based on theatre size and do visualizations to further explore the relationship.
+
+```{r mutate-size, echo = FALSE}
+grosses_size <- grosses %>%
+  mutate(theatre_size=(case_when(
+    seats_in_theatre<750 ~"small",
+    seats_in_theatre<1300 & seats_in_theatre>750 ~"medium",
+    seats_in_theatre>1299 ~"large")
+  )
+  )
+```
+
+### Frequency--Weekly Gross Revenue
+```{r weekly-gross-frequency, message = FALSE, echo = FALSE}
+grosses_size %>% 
+  filter(theatre_size != is.na(theatre_size)) %>%
+  ggplot(aes(x = weekly_gross, fill = theatre_size)) + 
+  geom_histogram() +
+  labs(
+    title = "Frequency of Theatres by Weekly Gross Revenue",
+    x = "Weekly Gross Revenue ($)", 
+    y = "Frequency",
+    fill = "Size of Theatre"
+  ) +
+  scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
+  
+```
+
+From the graph, most theatres have a weekly gross revenue between $0.4M and $1M, and the data trend goes the same as that in reality, with a very low frequency around 0 revenue, and later on as the revenue gets higher, the frequency becomes lower. More specifically, considering the size of the theatres, the ones with size small have a highest revenue of $0.7M, far lower than that of the medium and large ones. Besides, comparing the area of colors, we can see that most medium-sized theatres have a weekly gross revenue between $0.2 to $0.5, while most of the large ones have a revenue between $0.4 to $0.6, which is slightly higher. Let's look at more plots below to further discover the influence of theatre size.
+
+### Weekly Gross Revenue--Average Ticket Price
+```{r avgprice-weeklygross, message = FALSE, echo = FALSE}
+grosses %>%
+  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  labs(title = "Relationship Between Average Ticket Price and Weekly Gross Revenue",
+       x = "Average Ticket Price",
+       y = "Weekly Gross Revenue") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+### Weekly Gross Revenue--Percentage of Seats Capacity Sold
+```{r pctcapacity-weeklygross, message = FALSE, echo = FALSE}
+counting %>% 
+  ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
+  geom_point(alpha = 0.5) +
+  labs(title = "Percentage of Seats Capacity Sold and Weekly Gross Revenue", 
+       y = "Weekly Gross Revenue", 
+       x = "Percentage of Seats Capacity Sold",
+       color = "Theatre Size") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+This plot reveals the fact that higher percentage of seats capacity sold leads to higher weekly gross revenue. The distribution of colors, that red is above green, and green is above blue, demonstrate that under same percentage, theatres with larger size will have higher weekly gross revenue. This is the same as we expected, since the total number of seats is higher in larger theatres.
+
+### Weekly Gross Revenue/Average Ticket Price--Performances
+```{r performances-weeklygross, message = FALSE, echo = FALSE}
+counting %>%
+  ggplot(aes(x = performances, y = weekly_gross))+
+  geom_jitter()+
+  labs(x = "Number of Performances per Week", y = "Weekly Gross Revenue",
+       title = "Number of Performances per Week and Weekly Gross Revenue")+
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+This graph shows that some of the highest weekly gross revenue appear when the number of performances is 8 or 9. However, the graph doesn't indicate any relationship between weekly revenue and number of performances since the data are randomly disbributed without any pattern (that is, theatres with low number of performances per week can have high weekly revenue, while those with high number of performances per week may receive revenue not as high). 
+
+This is the same with average ticket price:
+
+```{r performances-avg price, message = FALSE, echo = FALSE}
+counting %>%
+  ggplot(aes(x = performances, y = avg_ticket_price))+
+  geom_jitter()+
+  labs(x = "Number of Performances per Week", y = "Average Ticket Price",
+       title = "Number of Performances per Week and Average Ticket Price")
+```
+
+
+------------------------------------------------------------------------------
+```{r mutate week, message = FALSE, echo = FALSE}
+counting<-grosses_size%>%
+  mutate(theatre_show=paste0(theatre,show))%>%
+  group_by(theatre_show)%>%
+  mutate(week_running=n())
+```
+
+```{r week running, message = FALSE, echo = FALSE}
+week_running_improved <- counting%>%
+  summarise(avg_ticket_price,theatre_show,week_running)
+
+improved<-aggregate(data=week_running_improved,
+            week_running_improved$avg_ticket_price,
+            by=list(theatre_show=week_running_improved$theatre_show,
+                    week_running=week_running_improved$week_running), 
+            FUN=mean)
+```
+
+### Average Ticket Price--Week Running
+```{r, message = FALSE, echo = FALSE}
+improved%>%
+  ggplot(aes(x=week_running,y=x))+
+  geom_smooth(se = FALSE)+
+  labs(title = "Relaionship Between Week Running and Average Ticket Price",
+       x = "Week Running",
+       y = "Average Ticket Price")
+```
+
+```{r, message = FALSE, echo = FALSE}
+
+improved%>%
+  ggplot(aes(x=week_running))+
+  geom_density()+
+  geom_vline(xintercept=375)
+
+
+improved_2<-improved%>%
+  filter(week_running<375)
+
+improved_2%>%
+  ggplot(aes(x=week_running,y=x))+
+  geom_smooth(se = FALSE)+
+  labs(title = "Relaionship Between Week Running and Average Ticket Price",
+       x = "Week Running",
+       y = "Average Ticket Price")
+
+linear_reg_week_running<-
+  linear_reg()%>%
+  set_engine("lm")%>%
+  fit(week_running ~ x,data=improved_2)
+
+tidy(linear_reg_week_running)
+```
+
+### Average Ticket Price--Seat Capacity
+```{r, message = FALSE, echo = FALSE }
+counting%>%
+  ggplot(aes(x=seats_in_theatre,y=avg_ticket_price,color=theatre_size))+
+  geom_smooth(se = FALSE)+
+  labs(title = "Relationship Between Theatre Size and Average Ticket Price",
+       x = "Seat Capacity",
+       y = "Average Ticket Price",
+       color = "Theatre Size")
+```
+
+Using the function geom_smooth, all points are joint together to form smooth curves. From the graph, we can see that there is no relationship between seat capacity and average ticket price.
+
+### Average Ticket Price--Percentage of Seats Capacity Sold
+```{r, message = FALSE, echo = FALSE}
+counting %>% 
+  ggplot(aes(x = pct_capacity, y = avg_ticket_price, color = theatre_size)) + 
+  geom_point(alpha = 0.5)+
+  labs(title = "Percentage of Seats Capacity Sold and Average Ticket Price",
+       x = "Percentage of Seats Capacity Sold",
+       y = "Average Ticket Price",
+       color = "Theatre Size")
+```
+
