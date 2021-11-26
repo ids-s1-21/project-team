@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="team   Felix, Jeni, Janet" />
-  <meta name="dcterms.date" content="2021-11-25" />
+  <meta name="dcterms.date" content="2021-11-26" />
   <title>Maximising Profits for Broadway Theatres</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -136,11 +136,7 @@
   <h1 class="title">Maximising Profits for Broadway Theatres</h1>
   <h2 class="author"><font size='8'>team <br> Felix, Jeni, Janet</font></h2>
   <h3 class="institute"><font size='10'>University of Edinburgh</font></h2>
-<<<<<<< HEAD
-  <h3 class="date"><font size = '6'>2021-11-25</font></h3>
-=======
-  <h3 class="date"><font size = '6'>2021-11-23</font></h3>
->>>>>>> 51a48f97230958156519dd735aa8eb7738903c67
+  <h3 class="date"><font size = '6'>2021-11-26</font></h3>
 </section>
 
 <section id="dataset" class="title-slide slide level1">
@@ -186,14 +182,9 @@
 <h1>Gross Weekly Revenue</h1>
 <p><img src="presentation_files/figure-revealjs/weekly-gross-frequency-1.png" width="80%" /></p>
 </section>
-<<<<<<< HEAD
 
 <section id="mutate-theatre-size" class="title-slide slide level1">
 <h1>MUTATE Theatre Size</h1>
-=======
-<section id="mutate-theatre-size" class="slide level2">
-<h2>MUTATE Theatre Size</h2>
->>>>>>> 51a48f97230958156519dd735aa8eb7738903c67
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>grosses_size <span class="ot">&lt;-</span> grosses <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">theatre_size =</span> (<span class="fu">case_when</span>(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    seats_in_theatre <span class="sc">&lt;</span> <span class="dv">750</span> <span class="sc">~</span> <span class="st">&quot;small&quot;</span>,</span>
@@ -207,20 +198,14 @@
 <h1>Gross Weekly Revenue</h1>
 <p><img src="presentation_files/figure-revealjs/weekly-gross-frequency-theatre-size-1.png" width="80%" /></p>
 </section>
-<<<<<<< HEAD
 
 <section id="percentage-capacity-vs-weekly-gross" class="title-slide slide level1">
 <h1>Percentage Capacity vs Weekly Gross</h1>
-=======
-<section id="percentage-capacity-vs-weekly-gross" class="slide level2">
-<h2>Percentage Capacity vs Weekly Gross</h2>
->>>>>>> 51a48f97230958156519dd735aa8eb7738903c67
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>counting <span class="ot">&lt;-</span> grosses_size <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">theatre_show =</span> <span class="fu">paste0</span>(theatre, show)) <span class="sc">%&gt;%</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(theatre_show) <span class="sc">%&gt;%</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">week_running =</span> <span class="fu">n</span>())</span></code></pre></div>
 </section>
-<<<<<<< HEAD
 
 <section id="percentage-capacity-and-weekly-gross" class="title-slide slide level1">
 <h1>Percentage Capacity and Weekly Gross</h1>
@@ -231,16 +216,6 @@
 <p><img src="presentation_files/figure-revealjs/avg-price-weekly-gross1-1.png" width="80%" /></p>
 </section>
 
-=======
-<section id="percentage-capacity-and-weekly-gross" class="slide level2">
-<h2>Percentage Capacity and Weekly Gross</h2>
-<p><img src="presentation_files/figure-revealjs/pctcapacity-weeklygross-1.png" width="80%" /></p>
-</section>
-<section id="main-question-average-price-vs-weekly-gross" class="slide level2">
-<h2>MAIN QUESTION: Average Price vs Weekly Gross</h2>
-<p><img src="presentation_files/figure-revealjs/avg-price-weekly-gross1-1.png" width="80%" /></p>
-</section></section>
->>>>>>> 51a48f97230958156519dd735aa8eb7738903c67
 <section id="hello-world" class="title-slide slide level1">
 <h1>Hello World</h1>
 <ul>
