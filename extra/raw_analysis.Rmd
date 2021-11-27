@@ -1,7 +1,9 @@
 ---
 title: "raw_analysis"
-output: html_document
-editor_options: 
+output:
+  pdf_document: default
+  html_document: default
+editor_options:
   chunk_output_type: console
 ---
 ```{r density-theatre}
@@ -177,8 +179,8 @@ summary(quadratic_model)
 
 grosses1$avg_ticket_price1=1/grosses1$avg_ticket_price
   
-improved_model<-
-  lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
+  improved_model<-
+    lm(grosses1$weekly_gross ~ grosses1$avg_ticket_price + 
        grosses1$avg_ticket_price2 +
        grosses1$avg_ticket_price1,
      data=grosses1)

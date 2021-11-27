@@ -1,6 +1,6 @@
-Project title
+Maximising Profits for Broadway Theatres
 ================
-by Team name
+team
 
 ## Summary
 
@@ -24,16 +24,15 @@ your project.
 
 ## Presentation
 
-\#why mutate
+#why mutate
 
-grosses%&gt;% ggplot(aes(x=seats\_in\_theatre))+ geom\_density()
+grosses%>% ggplot(aes(x=seats_in_theatre))+ geom_density()
 
-\#mutate
+#mutate
 
-grosses\_2&lt;-grosses%&gt;% mutate(theatre\_size=(case\_when(
-seats\_in\_theatre&lt;750 \~“small”, seats\_in\_theatre&lt;1300 &
-seats\_in\_theatre&gt;750 \~“median”, seats\_in\_theatre&gt;1299
-\~“large”) ) )
+grosses_2\<-grosses%>% mutate(theatre_size=(case_when(
+seats_in_theatre\<750 \~“small”, seats_in_theatre\<1300 &
+seats_in_theatre>750 \~“median”, seats_in_theatre>1299 \~“large”) ) )
 
 Our presentation can be found [here](presentation/presentation.html).
 
