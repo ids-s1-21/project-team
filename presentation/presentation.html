@@ -5,6 +5,7 @@
   <meta name="generator" content="pandoc">
   <meta name="author" content="team   Felix, Jeni, Janet" />
   <meta name="dcterms.date" content="2021-11-26" />
+>>>>>>> bafd5a11b18443dea485460c7e8b831c1ce2bc2d
   <title>Maximising Profits for Broadway Theatres</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -136,7 +137,11 @@
   <h1 class="title">Maximising Profits for Broadway Theatres</h1>
   <h2 class="author"><font size='8'>team <br> Felix, Jeni, Janet</font></h2>
   <h3 class="institute"><font size='10'>University of Edinburgh</font></h2>
+<<<<<<< HEAD
+  <h3 class="date"><font size = '6'>2021-11-27</font></h3>
+=======
   <h3 class="date"><font size = '6'>2021-11-26</font></h3>
+>>>>>>> bafd5a11b18443dea485460c7e8b831c1ce2bc2d
 </section>
 
 <section id="dataset" class="title-slide slide level1">
@@ -172,9 +177,13 @@
 
 <section id="research-question" class="title-slide slide level1">
 <h1>Research Question</h1>
-<ol type="1">
-<li>What are the factors that can affect the average ticket price of a show?</li>
-<li>Hence, how does average ticket price then influence the weekly gross revenue earned?</li>
+<ol>
+<li>
+What are the factors that can affect the average ticket price of a show?
+</li>
+<li>
+<b> Hence, how does average ticket price then influence the weekly gross revenue earned? </b>
+</li>
 </ol>
 </section>
 
@@ -185,6 +194,22 @@
 
 <section id="mutate-theatre-size" class="title-slide slide level1">
 <h1>MUTATE Theatre Size</h1>
+<<<<<<< HEAD
+<ul>
+<li>
+less than 750 seats = small
+</li>
+<li>
+750 ~ 1300 = medium
+</li>
+<li>
+more than 1300 = large
+</li>
+</ul>
+<p><img src="presentation_files/figure-revealjs/density-theatre-size-1.png" width="80%" /></p>
+</div>
+</div>
+=======
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>grosses_size <span class="ot">&lt;-</span> grosses <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">theatre_size =</span> (<span class="fu">case_when</span>(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    seats_in_theatre <span class="sc">&lt;</span> <span class="dv">750</span> <span class="sc">~</span> <span class="st">&quot;small&quot;</span>,</span>
@@ -192,6 +217,7 @@
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    seats_in_theatre <span class="sc">&gt;</span> <span class="dv">1299</span> <span class="sc">~</span> <span class="st">&quot;large&quot;</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+>>>>>>> bafd5a11b18443dea485460c7e8b831c1ce2bc2d
 </section>
 
 <section id="gross-weekly-revenue-1" class="title-slide slide level1">
@@ -199,8 +225,11 @@
 <p><img src="presentation_files/figure-revealjs/weekly-gross-frequency-theatre-size-1.png" width="80%" /></p>
 </section>
 
+<section>
 <section id="percentage-capacity-vs-weekly-gross" class="title-slide slide level1">
 <h1>Percentage Capacity vs Weekly Gross</h1>
+<<<<<<< HEAD
+=======
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>counting <span class="ot">&lt;-</span> grosses_size <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">theatre_show =</span> <span class="fu">paste0</span>(theatre, show)) <span class="sc">%&gt;%</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(theatre_show) <span class="sc">%&gt;%</span></span>
@@ -209,11 +238,22 @@
 
 <section id="percentage-capacity-and-weekly-gross" class="title-slide slide level1">
 <h1>Percentage Capacity and Weekly Gross</h1>
+>>>>>>> bafd5a11b18443dea485460c7e8b831c1ce2bc2d
 <p><img src="presentation_files/figure-revealjs/pctcapacity-weeklygross-1.png" width="80%" /></p>
 <p style="font-size:20px">
 # Main Question: Average Price vs Weekly Gross
 </p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>grosses <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> weekly_gross,<span class="at">x =</span> avg_ticket_price)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship Between Average Ticket Price and Gross Weekly Revenue&quot;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Average Ticket Price&quot;</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Gross Weekly Revenue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_dollar</span>(<span class="at">suffix =</span> <span class="st">&quot;M&quot;</span>, <span class="at">scale =</span> <span class="fl">1e-6</span>))</span></code></pre></div>
 <p><img src="presentation_files/figure-revealjs/avg-price-weekly-gross1-1.png" width="80%" /></p>
+<<<<<<< HEAD
+=======
 </section>
 
 <section id="hello-world" class="title-slide slide level1">
@@ -222,17 +262,10 @@
 <li><p>Click the <code>Knit</code> button to compile your presentation</p></li>
 <li><p>Make sure to commit and push all resulting files to your GitHub repo</p></li>
 </ul>
+>>>>>>> bafd5a11b18443dea485460c7e8b831c1ce2bc2d
 <p style="font-family:verdana">
 This is a paragraph.
 </p>
-</section>
-
-<section>
-<section id="using-reveal.js" class="title-slide slide level1">
-<h1>Using reveal.js</h1>
-<p>It’s possible to have a horizontal sliding transition as well as nest multiple slides to create a vertical stack.</p>
-<p>When presenting, you use the left/right arrows to step through the top-level (horizontal) slides. When you arrive at a vertical stack you can optionally press the up/down arrows to view the vertical slides or skip past them by pressing the right arrow.</p>
-<p>(click the down key now)</p>
 </section>
 <section id="reveal.js" class="slide level2">
 <h2>reveal.js</h2>
@@ -277,20 +310,7 @@ like this
 
 <section id="code" class="title-slide slide level1">
 <h1>Code</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a boring regression</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data =</span> cars)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   -17.6      6.76      -2.60 1.23e- 2
-## 2 speed           3.93     0.416      9.46 1.49e-12</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(model)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 12
-##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.651         0.644  15.4      89.6 1.49e-12     1  -207.  419.  425.
-## # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+
 </section>
 
 <section>

@@ -41,7 +41,7 @@ ggplot(grosses, aes(x=seats_in_theatre))+
 
 As this graph reveals, the seat capacity varies in different theatres. The size of a theatre might be a factor which influences the relationship between variables. Therefore, we mutate the theatres into different categories based on theatre size and do visualizations to further explore the relationship.
 
-```{r mutate-size, echo = FALSE}
+```{r mutate-size, echo = FALSE, message = FALSE}
 grosses_size <- grosses %>%
   mutate(theatre_size=(case_when(
     seats_in_theatre<750 ~"small",
