@@ -189,12 +189,18 @@ summary(improved_model)
 
 ```{r predict}
 grosses_log <- grosses%>%
-  mutate(
+  summarise(
     price_log = log(avg_ticket_price + 0.00001),
     gross_log = log(weekly_gross + 0.00001)
-  )%>%
-  summarise(price_log,gross_log)%>%
-filter(!is.na(price_log+gross_log))
+  )
+
+grosses_log%>%
+  ggplot(aes(x=price_log, y=gross_log))+
+  geom_point()+
+  geom_smooth()+
+  labs(title = "Log",
+       x = "Log(Average Ticket Price)",
+       y = "Log(Weekly Grosses)")
 
 logxy_preliminary <-
   linear_reg()%>%
