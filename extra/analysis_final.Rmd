@@ -197,3 +197,18 @@ counting %>%
        color = "Theatre Size")
 ```
 
+### Summary Statistics
+```{r summary, message = FALSE, echo = FALSE}
+grosses %>%
+  summarise(min_avgtprice = min(avg_ticket_price),
+            mean_avgtprice = mean(avg_ticket_price),
+            median_avgtprice = median(avg_ticket_price),
+            max_avgtprice = max(avg_ticket_price))
+
+grosses %>%
+  summarise(min_grossw = min(weekly_gross),
+            mean_grossw = mean(weekly_gross),
+            median_grossw = median(weekly_gross),
+            max_grossw = max(weekly_gross))
+```
+
