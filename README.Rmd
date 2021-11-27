@@ -4,6 +4,12 @@ author: team
 output: github_document
 ---
 
+```{r, message = FALSE, echo = FALSE}
+library(tidyverse)
+library(broom)
+library(tidytuesdayR)
+```
+
 ## Summary
 
 Write-up of your project and findings go here. 
@@ -19,8 +25,24 @@ You can also load your data here and present any analysis results / plots, but I
 And make sure to hide your code with  `echo = FALSE` unless the point you are trying to make is about the code itself.
 Your results with proper output and graphics go in your presentation, this space is for a brief summary of your project.
 
+
+The dataset used comes from Playbill, which is a US magazine for theatre-goers. The information of weekly box office grosses comes from 'The Broadway League', an association for Broadway theatres. 
+
+There are 47,524 cases of shows that are being played in the theatres at different times in a year.
+There are 14 variables. Some of the more important ones which we will be using in our analysis include the following:
+
+1. `show`
+2. `theatre`
+3. `weekly_gross`
+4. `avg_ticket_price`
+5. `seats_sold`
+6. `seat_capacity`
+7. `pct_capacity`
+8. `performances`
+
 ```{r load-data, echo = FALSE}
-# load data here, if you like
+grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
+glimpse(grosses)
 ```
 
 ## Presentation
@@ -45,7 +67,9 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data 
 
-Include a citation for your data here. 
+Hughes, E. & Mock, T. (2018, April 28), Broadway weekly grosses, <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-28>
+
+
 See http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840 for guidance on proper citation for datasets. 
 If you got your data off the web, make sure to note the retrieval date.
 
