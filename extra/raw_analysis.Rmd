@@ -205,6 +205,7 @@ logxy <- logxy_preliminary %>%
 
 glance(logxy)$r.squared
 
+set.seed(11)
 grosses_split<-initial_split(grosses_log,prop = 0.8)
 
 train_data <- training(grosses_split)
@@ -236,7 +237,4 @@ test_pred<- predict(gross_fit, test_data)%>%
 
 rsq(test_pred, truth = gross_log, estimate = .pred)
 rmse(test_pred, truth = gross_log, estimate = .pred)
-
-
 ```
-
