@@ -47,8 +47,10 @@ glimpse(grosses)
 
 # Research Question 
 
-1.  What are the factors that can affect the average ticket price of a show? 
-2. Hence, how does average ticket price then influence the weekly gross revenue earned?
+<ol>
+<li> What are the factors that can affect the average ticket price of a show? </li>
+<li> <b> Hence, how does average ticket price then influence the weekly gross revenue earned? </b> </li> 
+</ol>
 
 # Gross Weekly Revenue
 
@@ -66,7 +68,19 @@ grosses %>%
 ```
 
 # MUTATE Theatre Size
-```{r mutate-theatre-size, message = FALSE, warning = FALSE}
+
+<ul> 
+  <li> less than 750 seats = small </li>
+  <li> 750 ~ 1300 = medium </li>
+  <li> more than 1300 = large </li> 
+</ul>
+```{r density-theatre-size, message = FALSE, warning = FALSE, echo = FALSE}
+ggplot(grosses, aes(x = seats_in_theatre)) +
+  geom_density() +
+  labs(x = "Seats in Theatre", y = "Density")
+```
+
+```{r mutate-theatre-size, message = FALSE, warning = FALSE, echo = FALSE}
 grosses_size <- grosses %>%
   mutate(theatre_size = (case_when(
     seats_in_theatre < 750 ~ "small",
@@ -75,6 +89,8 @@ grosses_size <- grosses %>%
   )
   )
 ```
+</div>
+</div>
 
 # Gross Weekly Revenue
 
@@ -94,7 +110,7 @@ grosses_size %>%
 
 # Percentage Capacity vs Weekly Gross
 
-```{r counting, warning = FALSE, message = FALSE}
+```{r counting, warning = FALSE, message = FALSE, echo = FALSE}
 counting <- grosses_size %>%
   mutate(theatre_show = paste0(theatre, show)) %>%
   group_by(theatre_show) %>%
@@ -112,8 +128,6 @@ improved <- aggregate(data = week_running_improved,
             FUN = mean)
 ```
 
-# Percentage Capacity and Weekly Gross
-
 ```{r pctcapacity-weeklygross, warning = FALSE, message = FALSE, echo = FALSE}
 counting %>% 
   ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
@@ -127,7 +141,7 @@ counting %>%
 
 <p style="font-size:20px"># Main Question: Average Price vs Weekly Gross </p>
 
-```{r avg-price-weekly-gross1, message = FALSE, warning = FALSE, echo = FALSE}
+```{r avg-price-weekly-gross1, message = FALSE, warning = FALSE, cache = TRUE}
 grosses %>%
   ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
   geom_point() +
@@ -138,22 +152,7 @@ grosses %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-# Hello World
-
-- Click the `Knit` button to compile your presentation
-
-- Make sure to commit and push all resulting files to your GitHub repo
-
 <p style="font-family:verdana">This is a paragraph.</p>
-
-# Using reveal.js
-
-It's possible to have a horizontal sliding transition as well as nest multiple slides to create a vertical stack.
-
-When presenting, you use the left/right arrows to step through the top-level (horizontal) slides. When you arrive at a vertical stack you can optionally press the up/down arrows to view the vertical slides or skip past them by pressing the right arrow.
-
-(click the down key now)
-
 
 
 ## reveal.js
@@ -196,13 +195,6 @@ because you can combine HTML and Markdown syntax.
 <p style="font-size: 8pt; position: absolute; bottom: -5em; width: 100%; text-align: center;">*You can also add footnotes</p>
 
 # Code
-
-```{r boring-regression}
-# a boring regression
-model <- lm(dist ~ speed, data = cars)
-tidy(model)
-glance(model)
-```
 
 # Plots
 

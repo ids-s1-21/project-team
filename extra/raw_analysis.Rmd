@@ -114,7 +114,7 @@ improved<-aggregate(data=week_running_improved,
             FUN=mean)
 ```
 
-```{r }
+```{r week-running-avg-ticket-price}
 improved%>%
   ggplot(aes(x=week_running,y=x))+
   geom_smooth(se = FALSE)+
@@ -123,7 +123,7 @@ improved%>%
        y = "Average Ticket Price")
 ```
 
-```{r}
+```{r remove-avg-ticket-price}
 grosses1<-grosses%>%
   filter(!avg_ticket_price==0)
 
@@ -151,7 +151,7 @@ linear_reg_week_running<-
 tidy(linear_reg_week_running)
 ```
 
-```{r }
+```{r theatre-size-avg-ticket-price}
 counting%>%
   ggplot(aes(x=seats_in_theatre,y=avg_ticket_price,color=theatre_size))+
   geom_smooth(se = FALSE)+
