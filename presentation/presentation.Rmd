@@ -38,6 +38,7 @@ grosses <- read_csv("data/grosses.csv")
 - Compiled from Playbill, a magazine for theatres
 - Information on weekly grosses, average ticket price, etc of different theatre shows
 - 14 variables, 47,524 observations
+- `weekly_gross`, `avg_ticket_price`, `seats_in_theatre`, `weeks_running`
 
 # Dataset 
 
@@ -139,9 +140,9 @@ counting %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-<p style="font-size:20px"># Main Question: Average Price vs Weekly Gross </p>
+<p style="font-size:10px"># Main Question: Average Price vs Weekly Gross </p>
 
-```{r avg-price-weekly-gross1, message = FALSE, warning = FALSE, cache = TRUE}
+```{r avg-price-weekly-gross1, message = FALSE, warning = FALSE, cache = TRUE, echo = FALSE}
 grosses %>%
   ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
   geom_point() +
@@ -162,10 +163,8 @@ counting %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-<p style="font-family:verdana">This is a paragraph.</p>
-
-# Weekly Gross VS. Average Ticket Price Log Model
-```{r log_graph,message=FALSE,warning=FALSE}
+# Weekly Gross vs Average Ticket Price Log Model
+```{r log-graph,message = FALSE,warning = FALSE, echo = FALSE}
 grosses_log <- grosses%>%
   summarise(
     price_log = log(avg_ticket_price + 0.00001),
@@ -181,43 +180,49 @@ grosses_log%>%
        y = "Log(Weekly Gross)")
 ```
 
-```{r log_model,message=FALSE,warning=FALSE}
+# Set Model
+```{r log-model, message=FALSE, warning=FALSE}
 logxy_preliminary <-
   linear_reg()%>%
   set_engine("lm")
 
 logxy <- logxy_preliminary %>%
-  fit(gross_log ~ price_log, data=grosses_log)
+  fit(gross_log ~ price_log, data = grosses_log)
 ```
 
-```{r test_train_fit,message=FALSE,warning=FALSE}
+# Set recipe and workflow
+```{r test-train-fit, message = FALSE, warning = FALSE}
 set.seed(11)
-grosses_split<-initial_split(grosses_log,prop = 0.8)
+grosses_split <- initial_split(grosses_log, prop = 0.8)
 train_data <- training(grosses_split)
 test_data <- testing(grosses_split)
-grosses_rec <- recipe(gross_log ~.,data = grosses_log)%>%
+grosses_rec <- recipe(gross_log ~.,data = grosses_log) %>%
   step_zv(all_predictors())
-grosses_workflow <- workflow()%>%
-  add_model(logxy_preliminary)%>%
+grosses_workflow <- workflow() %>%
+  add_model(logxy_preliminary) %>%
   add_recipe(grosses_rec)
-gross_fit<-grosses_workflow%>%
+gross_fit<-grosses_workflow %>%
   fit(data = train_data)
 ```
 
-```{r pred,message=FALSE,warning=FALSE}
-gross_pred<-predict(object = gross_fit, new_data = train_data)%>%
-  bind_cols(train_data%>%select(gross_log,price_log))
-test_pred<- predict(gross_fit, test_data)%>%
-  bind_cols(test_data%>%select(gross_log,price_log))
+# Predicting model 
+```{r pred, message = FALSE,warning = FALSE}
+gross_pred <- predict(object = gross_fit, new_data = train_data) %>%
+  bind_cols(train_data %>% select(gross_log, price_log))
+test_pred <- predict(gross_fit, test_data) %>%
+  bind_cols(test_data %>% select(gross_log,price_log))
 ```
 
-```{r rsq&rmse,message=FALSE,warning=FALSE}
+# R Squared and RMSE Values 
+```{r rsq-rmse,message=FALSE,warning=FALSE}
 rsq(gross_pred, truth = gross_log, estimate = .pred)
 rmse(gross_pred, truth = gross_log, estimate = .pred)
 rsq(test_pred, truth = gross_log, estimate = .pred)
 rmse(test_pred, truth = gross_log, estimate = .pred)
 ```   
 ## reveal.js
+
+<p style="font-family:verdana">This is a paragraph.</p>
 
 - The presentation is created using the `reveal.js` package
 
