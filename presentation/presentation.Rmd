@@ -89,8 +89,6 @@ grosses_size <- grosses %>%
   )
   )
 ```
-</div>
-</div>
 
 # Gross Weekly Revenue
 
@@ -101,6 +99,7 @@ grosses_size %>%
   geom_histogram() +
   labs(
     title = "Frequency of Theatres by Weekly Gross Revenue",
+    subtitle = "coloured by theatre sizes",
     x = "Weekly Gross Revenue ($)", 
     y = "Frequency",
     fill = "Size of Theatre"
@@ -130,6 +129,7 @@ improved <- aggregate(data = week_running_improved,
 
 ```{r pctcapacity-weeklygross, warning = FALSE, message = FALSE, echo = FALSE}
 counting %>% 
+  filter(theatre_size != is.na(theatre_size)) %>% 
   ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
   geom_point(alpha = 0.5) +
   labs(title = "Percentage of Seats Capacity Sold and Weekly Gross Revenue", 
@@ -149,6 +149,16 @@ grosses %>%
   labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
        x = "Average Ticket Price",
        y = "Gross Weekly Revenue") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+#Number of Performances per Week
+```{r performances-per-wk-revenue}
+counting %>%
+  ggplot(aes(x = performances, y = weekly_gross))+
+  geom_point()+
+  labs(x = "Number of Performances per Week", y = "Weekly Gross Revenue",
+       title = "Number of Performances per Week and Weekly Gross Revenue")+
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
