@@ -230,12 +230,21 @@ test_pred <- predict(gross_fit, test_data) %>%
 ```
 
 # R Squared and RMSE Values 
-```{r rsq-rmse,message=FALSE,warning=FALSE}
+```{r rsq-rmse,message=FALSE,warning=FALSE,echo=FALSE}
 rsq(gross_pred, truth = gross_log, estimate = .pred)
 rmse(gross_pred, truth = gross_log, estimate = .pred)
 rsq(test_pred, truth = gross_log, estimate = .pred)
 rmse(test_pred, truth = gross_log, estimate = .pred)
 ```   
+# R Squared and RMSE Table
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+test_train_table <- tribble(
+  ~Pred, ~RSQ, ~RMSE,
+  "Test Data", 0.910, 0.451,
+  "Train Data", 0.913, 0.445,
+)
+knitr::kable(head(test_train_table),"html")
+```
 ## reveal.js
 
 <p style="font-family:verdana">This is a paragraph.</p>
