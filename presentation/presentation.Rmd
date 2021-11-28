@@ -201,6 +201,7 @@ logxy_preliminary <-
 logxy <- logxy_preliminary %>%
   fit(gross_log ~ price_log, data = grosses_log)
 ```
+$$y=e^{6.81}x^{1.51}$$
 
 # Set recipe and workflow
 ```{r test-train-fit, message = FALSE, warning = FALSE}
