@@ -198,7 +198,7 @@ grosses_log%>%
   ggplot(aes(x=price_log, y=gross_log))+
   geom_point()+
   geom_smooth()+
-  labs(title = "Log",
+  labs(title = "Log(Weekly Gross) VS. Log(Average Ticket Price)",
        x = "Log(Average Ticket Price)",
        y = "Log(Weekly Gross)")
 

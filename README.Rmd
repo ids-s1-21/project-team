@@ -34,6 +34,7 @@ There are 14 variables. Some of the more important ones which we will be using i
 grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
 ```
 
+<<<<<<< HEAD
 In this dataset, we have variables such as “average ticket price”, “percentage of seat capacity sold”, and “number of performances in the week”, which may affect weekly gross revenue. Further, we think the variables “seat capacity” and “number of weeks being run” may have an influence on “average ticket price”. Therefore, our research questions are:
 
 1.What are the factors that affect weekly gross revenue?
@@ -91,6 +92,8 @@ grosses_2<-grosses%>%
   )
   )
 
+=======
+>>>>>>> d566ed17900aa6a6d14ae3f618bd867a7953616a
 Our presentation can be found [here](presentation/presentation.html).
 
 ## Data 
