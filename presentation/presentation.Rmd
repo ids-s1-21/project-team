@@ -163,7 +163,19 @@ counting %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-# Weekly Gross vs Average Ticket Price Log Model
+# Average Ticket Price vs Weekly Gross
+```{r preliminary-graph, message = FALSE, warning = FALSE, echo = FALSE}
+grosses %>%
+  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  labs(title = "Relationship Between Average Ticket Price and Weekly Gross Revenue",
+       x = "Average Ticket Price",
+       y = "Weekly Gross Revenue") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+# The Log Model
 ```{r log-graph,message = FALSE,warning = FALSE, echo = FALSE}
 grosses_log <- grosses%>%
   summarise(
@@ -183,7 +195,7 @@ grosses_log%>%
 # Set Model
 ```{r log-model, message=FALSE, warning=FALSE}
 logxy_preliminary <-
-  linear_reg()%>%
+  linear_reg() %>%
   set_engine("lm")
 
 logxy <- logxy_preliminary %>%
@@ -198,11 +210,15 @@ train_data <- training(grosses_split)
 test_data <- testing(grosses_split)
 grosses_rec <- recipe(gross_log ~.,data = grosses_log) %>%
   step_zv(all_predictors())
+
 grosses_workflow <- workflow() %>%
   add_model(logxy_preliminary) %>%
   add_recipe(grosses_rec)
-gross_fit<-grosses_workflow %>%
+
+gross_fit <- grosses_workflow %>%
   fit(data = train_data)
+
+
 ```
 
 # Predicting model 
