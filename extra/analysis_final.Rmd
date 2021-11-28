@@ -206,7 +206,7 @@ grosses %>%
             max_avgtprice = max(avg_ticket_price))
 
 grosses %>%
-  summarise(min_grossw = min(weekly_gross),
+  summarise(min_grosswg = min(weekly_gross),
             mean_grossw = mean(weekly_gross),
             median_grossw = median(weekly_gross),
             max_grossw = max(weekly_gross))

@@ -189,12 +189,18 @@ summary(improved_model)
 
 ```{r predict}
 grosses_log <- grosses%>%
-  mutate(
+  summarise(
     price_log = log(avg_ticket_price + 0.00001),
     gross_log = log(weekly_gross + 0.00001)
-  )%>%
-  summarise(price_log,gross_log)%>%
-filter(!is.na(price_log+gross_log))
+  )
+
+grosses_log%>%
+  ggplot(aes(x=price_log, y=gross_log))+
+  geom_point()+
+  geom_smooth()+
+  labs(title = "Log(Weekly Gross) VS. Log(Average Ticket Price)",
+       x = "Log(Average Ticket Price)",
+       y = "Log(Weekly Gross)")
 
 logxy_preliminary <-
   linear_reg()%>%
@@ -205,6 +211,7 @@ logxy <- logxy_preliminary %>%
 
 glance(logxy)$r.squared
 
+set.seed(11)
 grosses_split<-initial_split(grosses_log,prop = 0.8)
 
 train_data <- training(grosses_split)
@@ -236,7 +243,4 @@ test_pred<- predict(gross_fit, test_data)%>%
 
 rsq(test_pred, truth = gross_log, estimate = .pred)
 rmse(test_pred, truth = gross_log, estimate = .pred)
-
-
 ```
-
