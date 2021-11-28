@@ -200,7 +200,7 @@ grosses_log%>%
   geom_smooth()+
   labs(title = "Log",
        x = "Log(Average Ticket Price)",
-       y = "Log(Weekly Grosses)")
+       y = "Log(Weekly Gross)")
 
 logxy_preliminary <-
   linear_reg()%>%
