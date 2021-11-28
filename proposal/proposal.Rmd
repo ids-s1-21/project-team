@@ -14,7 +14,6 @@ library(tidytuesdayR)
 
 ```{r read-grosses, message = FALSE}
 grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
-
 ```
 
 ## 1. Introduction
