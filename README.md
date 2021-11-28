@@ -4,23 +4,17 @@ team
 
 ## Summary
 
-Write-up of your project and findings go here. Think of this as the text
-of your presentation. The length should be roughly 5 minutes when read
-out loud. Although pacing varies, a 5-minute speech is roughly 750
-words. To use the word count addin, select the text you want to count
-the words of (probably this is the Summary section of this document, go
-to Addins, and select the `Word count` addin). This addin counts words
-using two different algorithms, but the results should be similar and as
-long as you’re in the ballpark of 750 words, you’re good! The addin will
-ignore code chunks and only count the words in prose.
+Gross revenue is important to brands and companies as it directly
+reveals whether income outweighs expenses and affects sellers’ decision
+on whether to continue this transaction. Therefore, finding ways to
+maximize gross revenue is necessary for a long lasting company. In this
+project, we focus on Broadway musicals weekly grosses (weekly box office
+gross for all shows). Comparing weekly gross in various theaters, we
+plan to explore factors that attribute to different amount of revenue
+and how they are related to each other.
 
-You can also load your data here and present any analysis results /
-plots, but I strongly urge you to keep that to a minimum (maybe only the
-most important graphic, if you have one you can choose). And make sure
-to hide your code with `echo = FALSE` unless the point you are trying to
-make is about the code itself. Your results with proper output and
-graphics go in your presentation, this space is for a brief summary of
-your project.
+Our main research topic is: How to maximize profits for Broadway
+theaters?
 
 The dataset used comes from Playbill, which is a US magazine for
 theatre-goers. The information of weekly box office grosses comes from
@@ -54,22 +48,83 @@ following:
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
-    ## Rows: 47,524
-    ## Columns: 14
-    ## $ week_ending          <date> 1985-06-09, 1985-06-09, 1985-06-09, 1985-06-09, …
-    ## $ week_number          <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-    ## $ weekly_gross_overall <dbl> 3915937, 3915937, 3915937, 3915937, 3915937, 3915…
-    ## $ show                 <chr> "42nd Street", "A Chorus Line", "Aren't We All?",…
-    ## $ theatre              <chr> "St. James Theatre", "Sam S. Shubert Theatre", "B…
-    ## $ weekly_gross         <dbl> 282368, 222584, 249272, 95688, 61059, 255386, 306…
-    ## $ potential_gross      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-    ## $ avg_ticket_price     <dbl> 30.42, 27.25, 33.75, 20.87, 20.78, 31.96, 28.33, …
-    ## $ top_ticket_price     <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-    ## $ seats_sold           <dbl> 9281, 8167, 7386, 4586, 2938, 7992, 10831, 5672, …
-    ## $ seats_in_theatre     <dbl> 1655, 1472, 1088, 682, 684, 1018, 1336, 1368, 148…
-    ## $ pct_capacity         <dbl> 0.7010, 0.6935, 0.8486, 0.8405, 0.5369, 0.9813, 1…
-    ## $ performances         <dbl> 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 0, 8, 8…
-    ## $ previews             <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0…
+In this dataset, we have variables such as “average ticket price”,
+“percentage of seat capacity sold”, and “number of performances in the
+week”, which may affect weekly gross revenue. Further, we think the
+variables “seat capacity” and “number of weeks being run” may have an
+influence on “average ticket price”. Therefore, our research questions
+are:
+
+1.What are the factors that affect weekly gross revenue?
+
+2.What are the factors that affect average ticket price of a show, and
+how average ticket price influence the weekly gross revenue earned?
+
+Our hypotheses are:
+
+1.Higher “average ticket price”, “percentage seats capacity sold”, and
+“number of performances in the week week” lead to higher “weekly gross
+revenue.”
+
+2.More specifically, higher “seat capacity” and “number of weeks being
+run” can lead to higher “average ticket price”.
+
+We plan to create various visualizations with models and apply
+inferential statistics to find out the relationship between those
+variables.
+
+Since “percentage of seat capacity sold” may be a factor affecting
+weekly gross and differs depend on total seats in theater, we first draw
+a density graph to see how “seat capacity” is distributed. As the graph
+reveals, the seat capacity varies greatly in different theaters. The
+size of a theatre might be a factor which influences the relationship
+between variables. Therefore, we mutate the theatres into “large”,
+“medium”, and “small” based on theatre size and do visualizations to
+further explore the relationship.
+
+First we look at factors that affect weekly gross revenue.
+
+### Average Ticket Price and Weekly Gross Revenue:
+
+Model, Economic analysis (reason behind that)
+
+### Percentage of Seats Capacity Sold and Weekly Gross Revenue:
+
+We use geom_point for the visualization of “weekly gross revenue”
+vs. “percentage of seats capacity sold” and use different colors for
+different theatre size. The plot reveals the fact that higher percentage
+of seats capacity sold leads to higher weekly gross revenue. Besides, we
+find that under same percentage, theatres with larger size will have
+higher weekly gross revenue. This is the same as we expected, since the
+total number of seats is higher in larger theatres.
+
+### Number of Performances in the Week and Weekly Gross Revenue:
+
+We then use geom_jitter for the plot of “weekly gross revenue”
+vs. “number of performances in the week”. However, the graph doesn’t
+indicate any relationship between them since the data are randomly
+disbributed without any pattern (that is, theatres with low number of
+performances per week can have high weekly revenue, while those with
+high number of performances per week may receive revenue not as high).
+This is the same for the relationship between “number of performances in
+the week” and “average ticket price”.
+
+In the next part we focus on factors that affect average ticket price.
+
+### Number of Weeks Being Run and Average Ticket Price:
+
+…
+
+### Seat Capacity and Average Ticket Price:
+
+Using the function geom_smooth, all points are joint together to form
+smooth curves to demonstrate how “average ticket price” is affected by
+“seat capacity”. From the graph, we can see that there is no
+relationship between those two variables.
+
+### Conclusion:
+
+…
 
 ## Presentation
 
