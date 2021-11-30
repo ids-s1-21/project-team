@@ -210,8 +210,7 @@ set.seed(11)
 grosses_split <- initial_split(grosses_log, prop = 0.8)
 train_data <- training(grosses_split)
 test_data <- testing(grosses_split)
-grosses_rec <- recipe(gross_log ~.,data = grosses_log) %>%
-  step_zv(all_predictors())
+grosses_rec <- recipe(gross_log ~.,data = grosses_log)
 
 grosses_workflow <- workflow() %>%
   add_model(logxy_preliminary) %>%
