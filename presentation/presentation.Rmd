@@ -53,7 +53,7 @@ glimpse(grosses)
 <li> <b> Hence, how does average ticket price then influence the weekly gross revenue earned? </b> </li> 
 </ol>
 
-# Gross Weekly Revenue
+## Gross Weekly Revenue
 
 ```{r weekly-gross-frequency, warning = FALSE, message = FALSE, echo = FALSE}
 grosses %>% 
@@ -68,15 +68,8 @@ grosses %>%
   scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
 ```
 
-# MUTATE Theatre Size
-
-<ul>
-  <p style="font-size:12px">
-    <li> less than 750 seats = small </li>
-    <li> 750 ~ 1300 = medium </li>
-    <li> more than 1300 = large </li> 
-  </p>
-</ul>
+## MUTATE Theatre Size
+less than 750 seats = small, 750 ~ 1300 = medium, more than 1300 = large
 ```{r density-theatre-size, message = FALSE, warning = FALSE, echo = FALSE}
 ggplot(grosses, aes(x = seats_in_theatre)) +
   geom_density() +
@@ -93,7 +86,7 @@ grosses_size <- grosses %>%
   )
 ```
 
-# Gross Weekly Revenue
+## Gross Weekly Revenue
 
 ```{r weekly-gross-frequency-theatre-size, warning = FALSE, message = FALSE, echo = FALSE}
 grosses_size %>% 
@@ -110,7 +103,7 @@ grosses_size %>%
   scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
 ```
 
-# Percentage Capacity vs Weekly Gross
+## Percentage Capacity
 
 ```{r counting, warning = FALSE, message = FALSE, echo = FALSE}
 counting <- grosses_size %>%
@@ -131,7 +124,7 @@ improved <- aggregate(data = week_running_improved,
 ```
 
 ```{r pctcapacity-weeklygross, warning = FALSE, message = FALSE, echo = FALSE}
-counting %>% 
+grosses_size %>% 
   filter(theatre_size != is.na(theatre_size)) %>% 
   ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
   geom_point(alpha = 0.5) +
@@ -142,18 +135,28 @@ counting %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-#Number of Performances per Week
-```{r performances-per-wk-revenue, message = FALSE, warning = FALSE, echo = FALSE}
+## Week Running
+```{r total-weeks-revenue, message = FALSE, warning = FALSE, echo = FALSE}
 counting %>%
-  ggplot(aes(x = performances, y = weekly_gross))+
+  ggplot(aes(x = week_running, y = weekly_gross))+
   geom_point()+
-  labs(x = "Number of Performances per Week", y = "Weekly Gross Revenue",
-       title = "Number of Performances per Week and Weekly Gross Revenue")+
+  labs(x = "Weeks Running", y = "Weekly Gross Revenue",
+       title = "Week Running of Show vs Weekly Gross Revenue")+
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-# Main Research
-```{r preliminary-graph, message = FALSE, warning = FALSE, echo = FALSE, cache = TRUE}
+## Number of Performances Per Week 
+```{r performances-per-wk-revenue, message = FALSE, warning = FALSE, echo = FALSE}
+grosses %>%
+  ggplot(aes(x = performances, y = weekly_gross))+
+  geom_point()+
+  labs(x = "Number of Performances Per Week", y = "Weekly Gross Revenue",
+       title = "Number of Performances Per Week")+
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+## Main Research
+```{r main-question, message = FALSE, warning = FALSE, echo = FALSE, cache = TRUE}
 grosses %>%
   ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
   geom_point() +
@@ -164,19 +167,23 @@ grosses %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-# Average Ticket Price vs Seats Sold
+## Average Ticket Price vs Seats Sold
 ```{r seats-sold-vs-avg-price, message = FALSE, warning = FALSE, echo = FALSE}
+seats_df <- grosses %>%
+  filter(avg_ticket_price > 400)
+
 grosses %>%
   ggplot(aes(x = avg_ticket_price, y = seats_sold)) + 
-  geom_point() + 
-  geom_smooth(se = FALSE) +
+  geom_point() +
+  geom_point(data = seats_df, 
+             aes(x = avg_ticket_price, y = seats_sold), 
+             colour = "red") +
   labs(title = "Average Ticket Price vs Seats Sold",
        x = "Average Ticket Price",
        y = "Seats Sold")
 ```
 
-
-# The Log Model
+## The Log Model
 ```{r log-graph,message = FALSE,warning = FALSE, echo = FALSE}
 grosses_log <- grosses%>%
   summarise(
@@ -193,7 +200,7 @@ grosses_log%>%
        y = "Log(Weekly Gross)")
 ```
 
-# Set Model
+## Set Model
 ```{r log-model, message=FALSE, warning=FALSE}
 logxy_preliminary <-
   linear_reg() %>%
@@ -216,8 +223,6 @@ grosses_workflow <- workflow() %>%
 
 gross_fit <- grosses_workflow %>%
   fit(data = train_data)
-
-
 ```
 ```{r pred, message = FALSE,warning = FALSE,echo=FALSE}
 gross_pred <- predict(object = gross_fit, new_data = train_data) %>%
@@ -225,14 +230,14 @@ gross_pred <- predict(object = gross_fit, new_data = train_data) %>%
 test_pred <- predict(gross_fit, test_data) %>%
   bind_cols(test_data %>% select(gross_log,price_log))
 ```
-# R Squared and RMSE
+## R Squared and RMSE
 ```{r rsq-rmse,message=FALSE,warning=FALSE,echo=FALSE,echo=FALSE}
 rsq(gross_pred, truth = gross_log, estimate = .pred)
 rmse(gross_pred, truth = gross_log, estimate = .pred)
 rsq(test_pred, truth = gross_log, estimate = .pred)
 rmse(test_pred, truth = gross_log, estimate = .pred)
 ```   
-# R Squared and RMSE Table
+## R Squared and RMSE Table
 ```{r,message=FALSE,warning=FALSE,echo=FALSE}
 test_train_table <- tribble(
   ~Pred, ~RSQ, ~RMSE,
@@ -241,6 +246,22 @@ test_train_table <- tribble(
 )
 knitr::kable(head(test_train_table),"html")
 ```
+
+Equation: 
+$$y=e^{6.81}x^{1.51}$$
+ 
+## Conclusion
+- theatre size, percentage capacity, average price influenced weekly gross 
+- number of performances per week, total number of weeks show ran for did not
+- modelled relationship between average ticket price and weekly gross revenue, which was found to be positive 
+
+## Limitations & Extensions
+- Limitations: might only be a particular set of customers in Broadway, larger samples of data
+
+- Future Extension: model that can include the exponential curvature of the graph
+
+# Thank you for watching
+
 ## reveal.js
 
 <p style="font-family:verdana">This is a paragraph.</p>

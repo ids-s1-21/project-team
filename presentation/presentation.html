@@ -171,6 +171,7 @@
 ## $ previews             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0…</code></pre>
 </section>
 
+<section>
 <section id="research-question" class="title-slide slide level1">
 <h1>Research Question</h1>
 <ol>
@@ -182,58 +183,44 @@ What are the factors that can affect the average ticket price of a show?
 </li>
 </ol>
 </section>
-
-<section id="gross-weekly-revenue" class="title-slide slide level1">
-<h1>Gross Weekly Revenue</h1>
+<section id="gross-weekly-revenue" class="slide level2">
+<h2>Gross Weekly Revenue</h2>
 <p><img src="presentation_files/figure-revealjs/weekly-gross-frequency-1.png" width="80%" /></p>
 </section>
-
-<section id="mutate-theatre-size" class="title-slide slide level1">
-<h1>MUTATE Theatre Size</h1>
-<ul>
-<p style="font-size:12px">
-<li>
-less than 750 seats = small
-</li>
-<li>
-750 ~ 1300 = medium
-</li>
-<li>
-more than 1300 = large
-</li>
-</p>
-</ul>
-<p><img src="presentation_files/figure-revealjs/density-theatre-size-1.png" width="80%" /></p>
+<section id="mutate-theatre-size" class="slide level2">
+<h2>MUTATE Theatre Size</h2>
+<p>less than 750 seats = small, 750 ~ 1300 = medium, more than 1300 = large <img src="presentation_files/figure-revealjs/density-theatre-size-1.png" width="80%" /></p>
 </section>
-
-<section id="gross-weekly-revenue-1" class="title-slide slide level1">
-<h1>Gross Weekly Revenue</h1>
+<section id="gross-weekly-revenue-1" class="slide level2">
+<h2>Gross Weekly Revenue</h2>
 <p><img src="presentation_files/figure-revealjs/weekly-gross-frequency-theatre-size-1.png" width="80%" /></p>
 </section>
-
-<section id="percentage-capacity-vs-weekly-gross" class="title-slide slide level1">
-<h1>Percentage Capacity vs Weekly Gross</h1>
+<section id="percentage-capacity" class="slide level2">
+<h2>Percentage Capacity</h2>
 <p><img src="presentation_files/figure-revealjs/pctcapacity-weeklygross-1.png" width="80%" /></p>
-<p>#Number of Performances per Week <img src="presentation_files/figure-revealjs/performances-per-wk-revenue-1.png" width="80%" /></p>
 </section>
-
-<section id="main-research" class="title-slide slide level1">
-<h1>Main Research</h1>
-<p><img src="presentation_files/figure-revealjs/preliminary-graph-1.png" width="80%" /></p>
+<section id="week-running" class="slide level2">
+<h2>Week Running</h2>
+<p><img src="presentation_files/figure-revealjs/total-weeks-revenue-1.png" width="80%" /></p>
 </section>
-
-<section id="average-ticket-price-vs-seats-sold" class="title-slide slide level1">
-<h1>Average Ticket Price vs Seats Sold</h1>
+<section id="number-of-performances-per-week" class="slide level2">
+<h2>Number of Performances Per Week</h2>
+<p><img src="presentation_files/figure-revealjs/performances-per-wk-revenue-1.png" width="80%" /></p>
+</section>
+<section id="main-research" class="slide level2">
+<h2>Main Research</h2>
+<p><img src="presentation_files/figure-revealjs/main-question-1.png" width="80%" /></p>
+</section>
+<section id="average-ticket-price-vs-seats-sold" class="slide level2">
+<h2>Average Ticket Price vs Seats Sold</h2>
 <p><img src="presentation_files/figure-revealjs/seats-sold-vs-avg-price-1.png" width="80%" /></p>
 </section>
-
-<section id="the-log-model" class="title-slide slide level1">
-<h1>The Log Model</h1>
+<section id="the-log-model" class="slide level2">
+<h2>The Log Model</h2>
 <p><img src="presentation_files/figure-revealjs/log-graph-1.png" width="80%" /></p>
 </section>
-
-<section id="set-model" class="title-slide slide level1">
-<h1>Set Model</h1>
+<section id="set-model" class="slide level2">
+<h2>Set Model</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>logxy_preliminary <span class="ot">&lt;-</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">&quot;lm&quot;</span>)</span>
@@ -242,9 +229,8 @@ more than 1300 = large
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(gross_log <span class="sc">~</span> price_log, <span class="at">data =</span> grosses_log)</span></code></pre></div>
 <p><span class="math display">\[y=e^{6.81}x^{1.51}\]</span></p>
 </section>
-
-<section id="r-squared-and-rmse" class="title-slide slide level1">
-<h1>R Squared and RMSE</h1>
+<section id="r-squared-and-rmse" class="slide level2">
+<h2>R Squared and RMSE</h2>
 <pre><code>## # A tibble: 1 × 3
 ##   .metric .estimator .estimate
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
@@ -262,10 +248,8 @@ more than 1300 = large
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
 ## 1 rmse    standard       0.451</code></pre>
 </section>
-
-<section>
-<section id="r-squared-and-rmse-table" class="title-slide slide level1">
-<h1>R Squared and RMSE Table</h1>
+<section id="r-squared-and-rmse-table" class="slide level2">
+<h2>R Squared and RMSE Table</h2>
 <table>
 <thead>
 <tr>
@@ -305,6 +289,27 @@ Train Data
 </tr>
 </tbody>
 </table>
+<p>Equation: <span class="math display">\[y=e^{6.81}x^{1.51}\]</span></p>
+</section>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<ul>
+<li>theatre size, percentage capacity, average price influenced weekly gross</li>
+<li>number of performances per week, total number of weeks show ran for did not</li>
+<li>modelled relationship between average ticket price and weekly gross revenue, which was found to be positive</li>
+</ul>
+</section>
+<section id="limitations-extensions" class="slide level2">
+<h2>Limitations &amp; Extensions</h2>
+<ul>
+<li><p>Limitations: might only be a particular set of customers in Broadway, larger samples of data</p></li>
+<li><p>Future Extension: model that can include the exponential curvature of the graph</p></li>
+</ul>
+</section></section>
+<section>
+<section id="thank-you-for-watching" class="title-slide slide level1">
+<h1>Thank you for watching</h1>
+
 </section>
 <section id="reveal.js" class="slide level2">
 <h2>reveal.js</h2>
