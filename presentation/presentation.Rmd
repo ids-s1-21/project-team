@@ -70,10 +70,12 @@ grosses %>%
 
 # MUTATE Theatre Size
 
-<ul> 
-  <li> less than 750 seats = small </li>
-  <li> 750 ~ 1300 = medium </li>
-  <li> more than 1300 = large </li> 
+<ul>
+  <p style="font-size:12px">
+    <li> less than 750 seats = small </li>
+    <li> 750 ~ 1300 = medium </li>
+    <li> more than 1300 = large </li> 
+  </p>
 </ul>
 ```{r density-theatre-size, message = FALSE, warning = FALSE, echo = FALSE}
 ggplot(grosses, aes(x = seats_in_theatre)) +
@@ -140,21 +142,8 @@ counting %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-<p style="font-size:10px"># Main Question: Average Price vs Weekly Gross </p>
-
-```{r avg-price-weekly-gross1, message = FALSE, warning = FALSE, cache = TRUE, echo = FALSE}
-grosses %>%
-  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
-  geom_point() +
-  geom_smooth(se = FALSE) +
-  labs(title = "Relationship Between Average Ticket Price and Gross Weekly Revenue",
-       x = "Average Ticket Price",
-       y = "Gross Weekly Revenue") +
-  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
-```
-
 #Number of Performances per Week
-```{r performances-per-wk-revenue}
+```{r performances-per-wk-revenue, message = FALSE, warning = FALSE, echo = FALSE}
 counting %>%
   ggplot(aes(x = performances, y = weekly_gross))+
   geom_point()+
@@ -163,17 +152,29 @@ counting %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-# Average Ticket Price vs Weekly Gross
-```{r preliminary-graph, message = FALSE, warning = FALSE, echo = FALSE}
+# Main Research
+```{r preliminary-graph, message = FALSE, warning = FALSE, echo = FALSE, cache = TRUE}
 grosses %>%
   ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
   geom_point() +
   geom_smooth(se = FALSE) +
-  labs(title = "Relationship Between Average Ticket Price and Weekly Gross Revenue",
+  labs(title = "Average Ticket Price vs Weekly Gross Revenue",
        x = "Average Ticket Price",
        y = "Weekly Gross Revenue") +
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
+
+# Average Ticket Price vs Seats Sold
+```{r seats-sold-vs-avg-price, message = FALSE, warning = FALSE, echo = FALSE}
+grosses %>%
+  ggplot(aes(x = avg_ticket_price, y = seats_sold)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE) +
+  labs(title = "Average Ticket Price vs Seats Sold",
+       x = "Average Ticket Price",
+       y = "Seats Sold")
+```
+
 
 # The Log Model
 ```{r log-graph,message = FALSE,warning = FALSE, echo = FALSE}
@@ -268,10 +269,6 @@ You can use plain text
 
 - or bullet points
 
-<div>
-  <div style="float: left; width: 50%;">or text in two columns</div>
-  <div style="float: left; width: 50%;">like this</div>
-</div>
 
 because you can combine HTML and Markdown syntax.
 
