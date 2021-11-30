@@ -8,6 +8,9 @@ output: github_document
 library(tidyverse)
 library(broom)
 library(tidytuesdayR)
+library(knitr)
+library(tidymodels)
+library(palmerpenguins)
 ```
 
 ## Summary
@@ -43,33 +46,53 @@ As a preliminary visualisation to better understand the data, two different vers
 
 The second version was completed after a mutation to the dataset was complete, where we divided theatres into small, medium, or large. Within the graph, we can see that small theateres generally earn less revenue due to less seats being sold, as opposed to large theatres. Large theatres, as shown in the visualisation, tends to have a higher probability of being able to earn more. The peak of the different theatre sizes seems to earn higher and higher revenue, the larger they are. This suggests that indeed, one of the factors that affect weekly gross revenue is the theatre size. 
 
-### Average Ticket Price and Weekly Gross Revenue:
-Model,
-
-Though this graph surprised us when we first saw it, after analysis, it makes sense economically. Average ticket prices increasing would increase gross revenue logically. However, at a certain point as price continues increasing, the demand becomes price inelastic, which means the consumers become more reluctant to buy the tickets due to high price, so the seats sold drops, resulting in lower gross revenue at high prices. 
-
 ### Percentage of Seats Capacity Sold and Weekly Gross Revenue:
-We use geom_point for the visualization of “weekly gross revenue" vs. “percentage of seats capacity sold” and use different colors for different theatre size. The plot reveals the fact that higher percentage of seats capacity sold leads to higher weekly gross revenue. Besides, we find that under same percentage, theatres with larger size will have higher weekly gross revenue. This is the same as we expected, since the total number of seats is higher in larger theatres.
+We plotte a scatter plot for the visualization of “weekly gross revenue" vs. “percentage of seats capacity sold” and mapped colours according to theatre size. The plot reveals the fact that higher percentage of seats capacity sold leads to higher weekly gross revenue. Besides, we find that even under same percentage, theatres with larger size will have higher weekly gross revenue. This is the same as we expected, since the total number of seats is higher in larger theatres.
+
+### Week Running and Weekly Gross Revenue:
+We thought that total number of weeks the show is being run might be a factor. However, because there wasn't such a variable in our data, we mutated and counted different shows. We also had to separate out same shows that were being played in different theatres. However, as we visualised it in a scatter plot, there is no clear relationship. It seems to be completely random, hence, the weeks running of the show is not a factor of weekly gross revenue. 
 
 ### Number of Performances in the Week and Weekly Gross Revenue:
 We then use geom_jitter for the plot of “weekly gross revenue” vs. “number of performances in the week”. However, the graph doesn’t indicate any relationship between them since the data are randomly disbributed without any pattern (that is, theatres with low number of performances per week can have high weekly revenue, while those with high number of performances per week may receive revenue not as high). This is the same for the relationship between “number of performances in the week” and “average ticket price”.
 
+### Main Research: Average Ticket Price and Weekly Gross Revenue
+In the graph to graph average ticket price with weekly gross revenue, the initial points seem to go up linearly, but then come down, suggesting an exponential relationship, as seen below.
+
+```{r main-question, message = FALSE, warning = FALSE, echo = FALSE, cache = TRUE}
+grosses %>%
+  ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  labs(title = "Average Ticket Price vs Weekly Gross Revenue",
+       x = "Average Ticket Price",
+       y = "Weekly Gross Revenue") +
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+```
+
+Economically, the graph makes sense. Average ticket prices increasing would increase gross revenue logically. However, at a certain point as price continues increasing, the demand becomes price inelastic, which means the consumers become more reluctant to buy the tickets due to high price, so the seats sold drops, resulting in lower gross revenue at high prices. 
+
+To see if this was indeed the case, we plotted a graph between seats sold and average ticket price. As you can see with the graph in our presentation, there are several red points, where price > 400. Below this threshold, it seems consumers do not really mind the price, they would still be willing to buy it, suggesting that they have relatively price inelastic demand. However, above 400, consumers seem to be more reluctant to buy the tickets. Surprisingly, these shows are all played in medium sized theatres, rather than small ones, where one would expect price to be larger due to higher demand. 
+
+Going back to the initial graph, we decided a log-log model might be the best, and hence we mutated a new value to take the logs of weekly gross revenue and average ticket price. However, before we did that, we had to add 0.0001 to each point since there were observations with values of 0 for both variables, then we plotted a graph to make sure we could indeed use linear model regression. 
+
+We set the linear regression model, splitting our data into testing and training, whilst creating a recipe and workflow, and was able to derive the R squared and RMSE values for testing and training data, which we found to be relatively similar. Both the R squared and RMSE value is similar for both training and testing data.
+
+Here is the mathematical equation that we derived from the model: $$y=e^{6.81}x^{1.51}$$
+
 ### Conclusion:
-...
+Among the variables we investigated, we found that theatre size, percentage capacity, and average ticket price influenced weekly gross revenue of shows, whereas neither the number of weeks the performance was showing nor the number of performances in a week had an effect. The relationship modelled between average ticket price and weekly gross revenue was quite successful as we found a relatively accurate model. 
+
+As an extension, we could hopefully find another model in the future that would be able to consider the curvature of the graph, making a more accurate model, since the log models do not encompass that section of the graph. 
 
 ## Presentation
 
 Our presentation can be found [here](presentation/presentation.html).
 
 ## Data 
-
 Hughes, E. & Mock, T. (2018, April 28), Broadway weekly grosses, <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-28>
-
 
 See http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840 for guidance on proper citation for datasets. 
 If you got your data off the web, make sure to note the retrieval date.
 
 ## References
-
-List any references here. You should, at a minimum, list your data source.
-
+Hughes, E. & Mock, T. (2018, April 28), Broadway weekly grosses, <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-28>

@@ -110,7 +110,7 @@ grosses_size %>%
   scale_x_continuous(labels = label_dollar(suffix = "M", scale = 1e-6)) 
 ```
 
-# Percentage Capacity vs Weekly Gross
+# Percentage Capacity
 
 ```{r counting, warning = FALSE, message = FALSE, echo = FALSE}
 counting <- grosses_size %>%
@@ -131,7 +131,7 @@ improved <- aggregate(data = week_running_improved,
 ```
 
 ```{r pctcapacity-weeklygross, warning = FALSE, message = FALSE, echo = FALSE}
-counting %>% 
+grosses_size %>% 
   filter(theatre_size != is.na(theatre_size)) %>% 
   ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
   geom_point(alpha = 0.5) +
@@ -142,18 +142,18 @@ counting %>%
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
-#Number of Performances per Week
+# Week Running
 ```{r performances-per-wk-revenue, message = FALSE, warning = FALSE, echo = FALSE}
 counting %>%
-  ggplot(aes(x = performances, y = weekly_gross))+
+  ggplot(aes(x = week_running, y = weekly_gross))+
   geom_point()+
-  labs(x = "Number of Performances per Week", y = "Weekly Gross Revenue",
-       title = "Number of Performances per Week and Weekly Gross Revenue")+
+  labs(x = "Weeks Running", y = "Weekly Gross Revenue",
+       title = "Week Running of Show vs Weekly Gross Revenue")+
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
 # Main Research
-```{r preliminary-graph, message = FALSE, warning = FALSE, echo = FALSE, cache = TRUE}
+```{r main-question, message = FALSE, warning = FALSE, echo = FALSE, cache = TRUE}
 grosses %>%
   ggplot(aes(y = weekly_gross,x = avg_ticket_price)) +
   geom_point() +
@@ -166,10 +166,15 @@ grosses %>%
 
 # Average Ticket Price vs Seats Sold
 ```{r seats-sold-vs-avg-price, message = FALSE, warning = FALSE, echo = FALSE}
+seats_df <- grosses %>%
+  filter(avg_ticket_price > 400)
+
 grosses %>%
   ggplot(aes(x = avg_ticket_price, y = seats_sold)) + 
-  geom_point() + 
-  geom_smooth(se = FALSE) +
+  geom_point() +
+  geom_point(data = seats_df, 
+             aes(x = avg_ticket_price, y = seats_sold), 
+             colour = "red") +
   labs(title = "Average Ticket Price vs Seats Sold",
        x = "Average Ticket Price",
        y = "Seats Sold")

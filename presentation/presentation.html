@@ -213,6 +213,20 @@ more than 1300 = large
 
 <section id="percentage-capacity-vs-weekly-gross" class="title-slide slide level1">
 <h1>Percentage Capacity vs Weekly Gross</h1>
+
+</section>
+
+<section id="percentage-seat-capacity-vs-weekly-gross" class="title-slide slide level1">
+<h1>Percentage Seat Capacity vs Weekly Gross</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>counting <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(theatre_size <span class="sc">!=</span> <span class="fu">is.na</span>(theatre_size)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> pct_capacity, <span class="at">y =</span> weekly_gross, <span class="at">color =</span> theatre_size)) <span class="sc">+</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Percentage of Seats Capacity Sold and Weekly Gross Revenue&quot;</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Weekly Gross Revenue&quot;</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Percentage of Seats Capacity Sold&quot;</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Theatre Size&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_dollar</span>(<span class="at">suffix =</span> <span class="st">&quot;M&quot;</span>, <span class="at">scale =</span> <span class="fl">1e-6</span>))</span></code></pre></div>
 <p><img src="presentation_files/figure-revealjs/pctcapacity-weeklygross-1.png" width="80%" /></p>
 <p>#Number of Performances per Week <img src="presentation_files/figure-revealjs/performances-per-wk-revenue-1.png" width="80%" /></p>
 </section>
@@ -234,42 +248,15 @@ more than 1300 = large
 
 <section id="set-model" class="title-slide slide level1">
 <h1>Set Model</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>logxy_preliminary <span class="ot">&lt;-</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">&quot;lm&quot;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>logxy <span class="ot">&lt;-</span> logxy_preliminary <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(gross_log <span class="sc">~</span> price_log, <span class="at">data =</span> grosses_log)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>logxy_preliminary <span class="ot">&lt;-</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">&quot;lm&quot;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>logxy <span class="ot">&lt;-</span> logxy_preliminary <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(gross_log <span class="sc">~</span> price_log, <span class="at">data =</span> grosses_log)</span></code></pre></div>
 <p><span class="math display">\[y=e^{6.81}x^{1.51}\]</span></p>
 </section>
 
-<section id="set-recipe-and-workflow" class="title-slide slide level1">
-<h1>Set recipe and workflow</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>grosses_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(grosses_log, <span class="at">prop =</span> <span class="fl">0.8</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(grosses_split)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">testing</span>(grosses_split)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>grosses_rec <span class="ot">&lt;-</span> <span class="fu">recipe</span>(gross_log <span class="sc">~</span>.,<span class="at">data =</span> grosses_log) <span class="sc">%&gt;%</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_zv</span>(<span class="fu">all_predictors</span>())</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>grosses_workflow <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(logxy_preliminary) <span class="sc">%&gt;%</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(grosses_rec)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>gross_fit <span class="ot">&lt;-</span> grosses_workflow <span class="sc">%&gt;%</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(<span class="at">data =</span> train_data)</span></code></pre></div>
-</section>
-
-<section id="predicting-model" class="title-slide slide level1">
-<h1>Predicting model</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gross_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object =</span> gross_fit, <span class="at">new_data =</span> train_data) <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(train_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(gross_log, price_log))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>test_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(gross_fit, test_data) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(gross_log,price_log))</span></code></pre></div>
-</section>
-
-<section id="r-squared-and-rmse-values" class="title-slide slide level1">
-<h1>R Squared and RMSE Values</h1>
 <section id="r-squared-and-rmse" class="title-slide slide level1">
 <h1>R Squared and RMSE</h1>
 <pre><code>## # A tibble: 1 × 3
