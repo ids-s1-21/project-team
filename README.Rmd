@@ -82,7 +82,9 @@ Here is the mathematical equation that we derived from the model: $$y=e^{6.81}x^
 ### Conclusion:
 Among the variables we investigated, we found that theatre size, percentage capacity, and average ticket price influenced weekly gross revenue of shows, whereas neither the number of weeks the performance was showing nor the number of performances in a week had an effect. The relationship modelled between average ticket price and weekly gross revenue was quite successful as we found a relatively accurate model. 
 
-As an extension, we could hopefully find another model in the future that would be able to consider the curvature of the graph, making a more accurate model, since the log models do not encompass that section of the graph. 
+Some limitations we faced with this data could likely be the geography, because it is limited to Broadway only, which could only be applicable to a certain set of customers. The data set size is also a limitation. 
+
+As an extension, we could hopefully find another model in the future that would be able to consider the curvature of the graph, making a more accurate model, since the log models do not encompass that section of the graph. We could also investigate why there are values of 0 for average ticket prices for some shows. 
 
 ## Presentation
 
