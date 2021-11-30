@@ -43,8 +43,6 @@ As a preliminary visualisation to better understand the data, two different vers
 
 The second version was completed after a mutation to the dataset was complete, where we divided theatres into small, medium, or large. Within the graph, we can see that small theateres generally earn less revenue due to less seats being sold, as opposed to large theatres. Large theatres, as shown in the visualisation, tends to have a higher probability of being able to earn more. The peak of the different theatre sizes seems to earn higher and higher revenue, the larger they are. This suggests that indeed, one of the factors that affect weekly gross revenue is the theatre size. 
 
-First we look at factors that affect weekly gross revenue.
-
 ### Average Ticket Price and Weekly Gross Revenue:
 Model,
 
@@ -55,11 +53,6 @@ We use geom_point for the visualization of “weekly gross revenue" vs. “perce
 
 ### Number of Performances in the Week and Weekly Gross Revenue:
 We then use geom_jitter for the plot of “weekly gross revenue” vs. “number of performances in the week”. However, the graph doesn’t indicate any relationship between them since the data are randomly disbributed without any pattern (that is, theatres with low number of performances per week can have high weekly revenue, while those with high number of performances per week may receive revenue not as high). This is the same for the relationship between “number of performances in the week” and “average ticket price”.
-
-In the next part we focus on factors that affect average ticket price.
-
-### Seat Capacity and Average Ticket Price:
-Using the function geom_smooth, all points are joint together to form smooth curves to demonstrate how “average ticket price” is affected by “seat capacity”. From the graph, we can see that there is no relationship between those two variables.
 
 ### Conclusion:
 ...
