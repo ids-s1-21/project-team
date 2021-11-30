@@ -54,7 +54,8 @@ First we look at factors that affect weekly gross revenue.
 
 ### Average Ticket Price and Weekly Gross Revenue:
 Model,
-Economic analysis (reason behind that)
+
+Though this graph surprised us when we first saw it, after analysis, it makes sense economically. Average ticket prices increasing would increase gross revenue logically. However, at a certain point as price continues increasing, the demand becomes price inelastic, which means the consumers become more reluctant to buy the tickets due to high price, so the seats sold drops, resulting in lower gross revenue at high prices. 
 
 ### Percentage of Seats Capacity Sold and Weekly Gross Revenue:
 We use geom_point for the visualization of “weekly gross revenue" vs. “percentage of seats capacity sold” and use different colors for different theatre size. The plot reveals the fact that higher percentage of seats capacity sold leads to higher weekly gross revenue. Besides, we find that under same percentage, theatres with larger size will have higher weekly gross revenue. This is the same as we expected, since the total number of seats is higher in larger theatres.
@@ -64,9 +65,6 @@ We then use geom_jitter for the plot of “weekly gross revenue” vs. “number
 
 In the next part we focus on factors that affect average ticket price.
 
-### Number of Weeks Being Run and Average Ticket Price:
-...
-
 ### Seat Capacity and Average Ticket Price:
 Using the function geom_smooth, all points are joint together to form smooth curves to demonstrate how “average ticket price” is affected by “seat capacity”. From the graph, we can see that there is no relationship between those two variables.
 
@@ -74,23 +72,6 @@ Using the function geom_smooth, all points are joint together to form smooth cur
 ...
 
 ## Presentation
-#why mutate
-
-grosses%>%
-  ggplot(aes(x=seats_in_theatre))+
-  geom_density()
-
-  
-#mutate
-
-grosses_2<-grosses%>%
-  mutate(theatre_size=(case_when(
-    seats_in_theatre<750 ~"small",
-    seats_in_theatre<1300 & seats_in_theatre>750 ~"median",
-    seats_in_theatre>1299 ~"large")
-  )
-  )
-
 
 Our presentation can be found [here](presentation/presentation.html).
 
