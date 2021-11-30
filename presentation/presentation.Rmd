@@ -203,9 +203,7 @@ logxy <- logxy_preliminary %>%
   fit(gross_log ~ price_log, data = grosses_log)
 ```
 $$y=e^{6.81}x^{1.51}$$
-
-# Set recipe and workflow
-```{r test-train-fit, message = FALSE, warning = FALSE}
+```{r test-train-fit, message = FALSE, warning = FALSE,echo=FALSE}
 set.seed(11)
 grosses_split <- initial_split(grosses_log, prop = 0.8)
 train_data <- training(grosses_split)
@@ -221,17 +219,14 @@ gross_fit <- grosses_workflow %>%
 
 
 ```
-
-# Predicting model 
-```{r pred, message = FALSE,warning = FALSE}
+```{r pred, message = FALSE,warning = FALSE,echo=FALSE}
 gross_pred <- predict(object = gross_fit, new_data = train_data) %>%
   bind_cols(train_data %>% select(gross_log, price_log))
 test_pred <- predict(gross_fit, test_data) %>%
   bind_cols(test_data %>% select(gross_log,price_log))
 ```
-
-# R Squared and RMSE Values 
-```{r rsq-rmse,message=FALSE,warning=FALSE,echo=FALSE}
+# R Squared and RMSE
+```{r rsq-rmse,message=FALSE,warning=FALSE,echo=FALSE,echo=FALSE}
 rsq(gross_pred, truth = gross_log, estimate = .pred)
 rmse(gross_pred, truth = gross_log, estimate = .pred)
 rsq(test_pred, truth = gross_log, estimate = .pred)
