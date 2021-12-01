@@ -35,13 +35,13 @@ was no clear relationship that could be concluded. Thus, to increase the
 depth of our analysis, we decided to focus on gross revenue instead,
 specifically on how average ticket price can impact gross revenue.
 
-Our hyphothesis is: Theatre’s weekly gross revenue is affected by
-average ticket price, theatre size, percentage of seats capacity sold,
-number of weeks being run, and number of performances in the week.
-Specifically, larger theatre size, higher average ticket price, higher
-percentage of seats capacity sold, higher number of performances in the
-week, and lower number of weeks the performance was showing attribute to
-higher weekly gross revenue.
+Our hypothesis is: Theatre’s weekly gross revenue is affected by average
+ticket price, theatre size, percentage of seats capacity sold, number of
+weeks being run, and number of performances in the week. Specifically,
+larger theatre size, higher average ticket price, higher percentage of
+seats capacity sold, higher number of performances in the week, and
+lower number of weeks the performance was showing attribute to higher
+weekly gross revenue.
 
 We created various visualizations, generated a model, and applied
 inferential statistics to aid us in our investigation. Here is a summary
@@ -61,19 +61,13 @@ density graph.
 
 ### Frequency of Weekly Gross Revenue
 
-As a preliminary visualisation to better understand the data, two
-different versions of this graph were incorporated. The first was a
-simple black-and-white one, where we see the distribution is
-right-skewed, with most shows earning approximately $0.5 million per
-week. Only a few shows manage to earn above $3 million, and that might
-be considered special occasions such as finale or opening weeks, where
-there is a surge in demand.
-
-The second version was completed after a mutation to the dataset was
-complete, where we divided theatres into small, medium, or large. Within
-the graph, we can see that small theateres generally earn less revenue
-due to less seats being sold, as opposed to large theatres. Large
-theatres, as shown in the visualisation, tends to have a higher
+As a preliminary visualisation to better understand the data, we plotted
+a histogram for weekly grosses. We see that the graph is right skewed
+and only a few shows managed to earn more than $3 million in weekly
+grosses. Furthermore, we divided theatres into small, medium, or large.
+Within the graph, we can see that small theateres generally earn less
+revenue due to less seats being sold, as opposed to large theatres.
+Large theatres, as shown in the visualisation, tends to have a higher
 probability of being able to earn more. The peak of the different
 theatre sizes seems to earn higher and higher revenue, the larger they
 are. This suggests that indeed, one of the factors that affect weekly
@@ -177,7 +171,8 @@ average ticket prices for some shows.
 
 ## Presentation
 
-Our presentation can be found [here](presentation/presentation.html).
+Our presentation can be found
+[here](http://rpubs.com/JeniLiu/presentation).
 
 ## Data
 
