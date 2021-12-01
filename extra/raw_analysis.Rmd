@@ -244,3 +244,13 @@ test_pred<- predict(gross_fit, test_data)%>%
 rsq(test_pred, truth = gross_log, estimate = .pred)
 rmse(test_pred, truth = gross_log, estimate = .pred)
 ```
+
+```{r }
+set.seed(20)
+folds <- vfold_cv(train_data,v=5)
+fit_rs <- grosses_workflow%>%
+  fit_resamples(folds)
+collect_metrics(fit_rs)
+collect_metrics(fit_rs, summarize = FALSE)%>%
+  summary()
+```

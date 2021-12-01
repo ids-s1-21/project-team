@@ -239,7 +239,7 @@ rmse(gross_pred, truth = gross_log, estimate = .pred)
 rsq(test_pred, truth = gross_log, estimate = .pred)
 rmse(test_pred, truth = gross_log, estimate = .pred)
 ```   
-## R Squared and RMSE Table
+## RSQ-RMSE Table & Cross Validation
 ```{r,message=FALSE,warning=FALSE,echo=FALSE}
 test_train_table <- tribble(
   ~Pred, ~RSQ, ~RMSE,
@@ -248,10 +248,24 @@ test_train_table <- tribble(
 )
 knitr::kable(head(test_train_table),"html")
 ```
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+set.seed(20)
+folds <- vfold_cv(train_data,v=5)
+fit_rs <- grosses_workflow%>%
+  fit_resamples(folds)
+collect_metrics(fit_rs)
+collect_metrics(fit_rs, summarize = FALSE)%>%
+  summary()
+```
 
-Equation: 
+## Equation & Graph
 $$y=e^{6.81}x^{1.51}$$
- 
+```{r log curve,message=FALSE,warning=FALSE,echo=FALSE}
+curve((2.71828182846)^6.81*x^1.51,from = 0, to = 500, 
+      xlab="Average Ticket Price", 
+      ylab="Weekly Gross")
+```
+
 ## Conclusion
 - theatre size, percentage capacity, average price influenced weekly gross 
 - number of performances per week, total number of weeks show ran for did not

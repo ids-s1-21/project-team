@@ -35,6 +35,14 @@ was no clear relationship that could be concluded. Thus, to increase the
 depth of our analysis, we decided to focus on gross revenue instead,
 specifically on how average ticket price can impact gross revenue.
 
+Our hyphothesis is: Theatre’s weekly gross revenue is affected by
+average ticket price, theatre size, percentage of seats capacity sold,
+number of weeks being run, and number of performances in the week.
+Specifically, larger theatre size, higher average ticket price, higher
+percentage of seats capacity sold, higher number of performances in the
+week, and lower number of weeks the performance was showing attribute to
+higher weekly gross revenue.
+
 We created various visualizations, generated a model, and applied
 inferential statistics to aid us in our investigation. Here is a summary
 of the following graphs we found useful and included in our
@@ -152,10 +160,20 @@ was showing nor the number of performances in a week had an effect. The
 relationship modelled between average ticket price and weekly gross
 revenue was quite successful as we found a relatively accurate model.
 
+The result proves some of our hypothesis. It reveals that to maximize
+theatre’s gross revenue, the theatre size needs to be larger, with a
+high percentage of seats capacity sold each show, and a medium average
+ticket price that is neither too high or too low.
+
+Some limitations we faced with this data could likely be the geography,
+because it is limited to Broadway only, which could only be applicable
+to a certain set of customers. The data set size is also a limitation.
+
 As an extension, we could hopefully find another model in the future
 that would be able to consider the curvature of the graph, making a more
 accurate model, since the log models do not encompass that section of
-the graph.
+the graph. We could also investigate why there are values of 0 for
+average ticket prices for some shows.
 
 ## Presentation
 
@@ -172,5 +190,5 @@ web, make sure to note the retrieval date.
 
 ## References
 
-List any references here. You should, at a minimum, list your data
-source.
+Hughes, E. & Mock, T. (2018, April 28), Broadway weekly grosses,
+<https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-28>

@@ -36,6 +36,9 @@ grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/ti
 
 Initially, we wanted to look at how average ticket price could be impacted by the different variables as well, but we realised that there was no clear relationship that could be concluded. Thus, to increase the depth of our analysis, we decided to focus on gross revenue instead, specifically on how average ticket price can impact gross revenue. 
 
+Our hypothesis is:
+Theatre's weekly gross revenue is affected by average ticket price, theatre size, percentage of seats capacity sold, number of weeks being run, and number of performances in the week. Specifically, larger theatre size, higher average ticket price, higher percentage of seats capacity sold, higher number of performances in the week, and lower number of weeks the performance was showing attribute to higher weekly gross revenue.
+
 We created various visualizations, generated a model, and applied inferential statistics to aid us in our investigation. Here is a summary of the following graphs we found useful and included in our presentation:
 
 ### Mutation of `theatre_size`
@@ -81,6 +84,8 @@ Here is the mathematical equation that we derived from the model: $$y=e^{6.81}x^
 
 ### Conclusion:
 Among the variables we investigated, we found that theatre size, percentage capacity, and average ticket price influenced weekly gross revenue of shows, whereas neither the number of weeks the performance was showing nor the number of performances in a week had an effect. The relationship modelled between average ticket price and weekly gross revenue was quite successful as we found a relatively accurate model. 
+
+The result proves some of our hypothesis. It reveals that to maximize theatre's gross revenue, the theatre size needs to be larger, with a high percentage of seats capacity sold each show, and a medium average ticket price that is neither too high or too low.
 
 Some limitations we faced with this data could likely be the geography, because it is limited to Broadway only, which could only be applicable to a certain set of customers. The data set size is also a limitation. 
 

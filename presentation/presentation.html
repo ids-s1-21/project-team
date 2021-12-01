@@ -248,8 +248,8 @@ What are the factors that can affect the average ticket price of a show?
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
 ## 1 rmse    standard       0.451</code></pre>
 </section>
-<section id="r-squared-and-rmse-table" class="slide level2">
-<h2>R Squared and RMSE Table</h2>
+<section id="rsq-rmse-table-cross-validation" class="slide level2">
+<h2>RSQ-RMSE Table &amp; Cross Validation</h2>
 <table>
 <thead>
 <tr>
@@ -289,7 +289,29 @@ Train Data
 </tr>
 </tbody>
 </table>
-<p>Equation: <span class="math display">\[y=e^{6.81}x^{1.51}\]</span></p>
+<pre><code>## # A tibble: 2 × 6
+##   .metric .estimator  mean     n std_err .config             
+##   &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+## 1 rmse    standard   0.445     5 0.00415 Preprocessor1_Model1
+## 2 rsq     standard   0.912     5 0.00569 Preprocessor1_Model1</code></pre>
+<pre><code>##       id              .metric           .estimator          .estimate     
+##  Length:10          Length:10          Length:10          Min.   :0.4346  
+##  Class :character   Class :character   Class :character   1st Qu.:0.4436  
+##  Mode  :character   Mode  :character   Mode  :character   Median :0.6760  
+##                                                           Mean   :0.6784  
+##                                                           3rd Qu.:0.9135  
+##                                                           Max.   :0.9241  
+##    .config         
+##  Length:10         
+##  Class :character  
+##  Mode  :character  
+##                    
+##                    
+## </code></pre>
+</section>
+<section id="equation-graph" class="slide level2">
+<h2>Equation &amp; Graph</h2>
+<p><span class="math display">\[y=e^{6.81}x^{1.51}\]</span> <img src="presentation_files/figure-revealjs/log%20curve-1.png" width="80%" /></p>
 </section>
 <section id="conclusion" class="slide level2">
 <h2>Conclusion</h2>
@@ -366,7 +388,7 @@ This is a paragraph.
 <li>goes here</li>
 </ul>
 </div><div class="column">
-<p><img src="presentation_files/figure-revealjs/unnamed-chunk-2-1.png" width="100%" /></p>
+<p><img src="presentation_files/figure-revealjs/unnamed-chunk-3-1.png" width="100%" /></p>
 </div>
 </div>
 </section>
@@ -379,7 +401,7 @@ This is a paragraph.
 <li>goes here</li>
 </ul>
 </div><div class="column" style="width:60%;">
-<p><img src="presentation_files/figure-revealjs/unnamed-chunk-3-1.png" width="100%" /></p>
+<p><img src="presentation_files/figure-revealjs/unnamed-chunk-4-1.png" width="100%" /></p>
 </div>
 </div>
 </section></section>
