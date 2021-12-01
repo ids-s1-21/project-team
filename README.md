@@ -182,7 +182,7 @@ Our presentation can be found
 [here](http://rpubs.com/JeniLiu/presentation).
 
 Our pre-recorded video can be found
-[here](https://media.ed.ac.uk/media/IDS+2021-2022+PresentationA+team/1_ac93sfh1li).
+[here](https://media.ed.ac.uk/media/IDS+2021-2022+PresentationA+team/1_ac93sfh1).
 
 ## Data
 
