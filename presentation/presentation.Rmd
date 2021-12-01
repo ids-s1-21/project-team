@@ -38,7 +38,7 @@ grosses <- read_csv("data/grosses.csv")
 - Compiled from Playbill, a magazine for theatres
 - Information on weekly grosses, average ticket price, etc of different theatre shows
 - 14 variables, 47,524 observations
-- `weekly_gross`, `avg_ticket_price`, `seats_in_theatre`, `weeks_running`
+- `weekly_gross`, `avg_ticket_price`, `seats_sold`, `seats_in_theatre`, `pct_capacity`, `performances`
 
 # Dataset 
 

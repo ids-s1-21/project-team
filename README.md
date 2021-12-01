@@ -35,13 +35,13 @@ was no clear relationship that could be concluded. Thus, to increase the
 depth of our analysis, we decided to focus on gross revenue instead,
 specifically on how average ticket price can impact gross revenue.
 
-Our hyphothesis is: Theatre’s weekly gross revenue is affected by
-average ticket price, theatre size, percentage of seats capacity sold,
-number of weeks being run, and number of performances in the week.
-Specifically, larger theatre size, higher average ticket price, higher
-percentage of seats capacity sold, higher number of performances in the
-week, and lower number of weeks the performance was showing attribute to
-higher weekly gross revenue.
+Our hypothesis is: Theatre’s weekly gross revenue is affected by average
+ticket price, theatre size, percentage of seats capacity sold, number of
+weeks being run, and number of performances in the week. Specifically,
+larger theatre size, higher average ticket price, higher percentage of
+seats capacity sold, higher number of performances in the week, and
+lower number of weeks the performance was showing attribute to higher
+weekly gross revenue.
 
 We created various visualizations, generated a model, and applied
 inferential statistics to aid us in our investigation. Here is a summary
