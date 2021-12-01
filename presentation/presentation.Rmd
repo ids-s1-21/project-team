@@ -42,7 +42,7 @@ grosses <- read_csv("data/grosses.csv")
 
 # Dataset 
 
-```{r data}
+```{r data, warning = FALSE, message = FALSE, echo = FALSE}
 glimpse(grosses)
 ```
 
@@ -130,7 +130,7 @@ grosses_size %>%
   filter(theatre_size != is.na(theatre_size)) %>% 
   ggplot(aes(x = pct_capacity, y = weekly_gross, color = theatre_size)) + 
   geom_point(alpha = 0.5) +
-  labs(title = "Percentage of Seats Capacity Sold and Weekly Gross Revenue", 
+  labs(title = "Percentage of Seats Capacity Sold vs Weekly Gross Revenue", 
        y = "Weekly Gross Revenue", 
        x = "Percentage of Seats Capacity Sold",
        color = "Theatre Size") +
@@ -153,7 +153,7 @@ grosses %>%
   ggplot(aes(x = performances, y = weekly_gross))+
   geom_point()+
   labs(x = "Number of Performances Per Week", y = "Weekly Gross Revenue",
-       title = "Number of Performances Per Week")+
+       title = "Number of Performances Per Week vs Weekly Gross")+
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
