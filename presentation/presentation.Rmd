@@ -42,7 +42,7 @@ grosses <- read_csv("data/grosses.csv")
 
 # Dataset 
 
-```{r data}
+```{r data, message = FALSE, echo = FALSE}
 glimpse(grosses)
 ```
 
