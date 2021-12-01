@@ -26,8 +26,9 @@ we will be using in our analysis include the following:
 1.  `weekly_gross`
 2.  `avg_ticket_price`
 3.  `seats_sold`
-4.  `pct_capacity`
-5.  `performances`
+4.  `seats_in_theatre`
+5.  `pct_capacity`
+6.  `performances`
 
 Initially, we wanted to look at how average ticket price could be
 impacted by the different variables as well, but we realised that there
@@ -61,13 +62,19 @@ density graph.
 
 ### Frequency of Weekly Gross Revenue
 
-As a preliminary visualisation to better understand the data, we plotted
-a histogram for weekly grosses. We see that the graph is right skewed
-and only a few shows managed to earn more than $3 million in weekly
-grosses. Furthermore, we divided theatres into small, medium, or large.
-Within the graph, we can see that small theateres generally earn less
-revenue due to less seats being sold, as opposed to large theatres.
-Large theatres, as shown in the visualisation, tends to have a higher
+As a preliminary visualisation to better understand the data, two
+different versions of this graph were incorporated. The first was a
+simple black-and-white one, where we see the distribution is
+right-skewed, with most shows earning approximately $0.5 million per
+week. Only a few shows manage to earn above $3 million, and that might
+be considered special occasions such as finale or opening weeks, where
+there is a surge in demand.
+
+The second version was completed after a mutation to the dataset was
+complete, where we divided theatres into small, medium, or large. Within
+the graph, we can see that small theateres generally earn less revenue
+due to less seats being sold, as opposed to large theatres. Large
+theatres, as shown in the visualisation, tends to have a higher
 probability of being able to earn more. The peak of the different
 theatre sizes seems to earn higher and higher revenue, the larger they
 are. This suggests that indeed, one of the factors that affect weekly
@@ -173,6 +180,9 @@ average ticket prices for some shows.
 
 Our presentation can be found
 [here](http://rpubs.com/JeniLiu/presentation).
+
+Our pre-recorded video can be found
+[here](https://media.ed.ac.uk/media/IDS+2021-2022+PresentationA+team/1_ac93sfh1li).
 
 ## Data
 

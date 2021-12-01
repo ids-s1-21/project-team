@@ -96,6 +96,8 @@ As an extension, we could hopefully find another model in the future that would 
 
 Our presentation can be found [here](http://rpubs.com/JeniLiu/presentation).
 
+Our pre-recorded video can be found [here](https://media.ed.ac.uk/media/IDS+2021-2022+PresentationA+team/1_ac93sfh1li).
+
 ## Data 
 Hughes, E. & Mock, T. (2018, April 28), Broadway weekly grosses, <https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-28>
 
