@@ -70,7 +70,8 @@ grosses %>%
   labs(title = "Average Ticket Price vs Weekly Gross Revenue",
        x = "Average Ticket Price ($)",
        y = "Weekly Gross Revenue ($)") +
-  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))+
+  scale_x_continuous(labels = label_dollar())
 ```
 
 Economically, the graph makes sense. Average ticket prices increasing would increase gross revenue logically. However, at a certain point as price continues increasing, the demand becomes price inelastic, which means the consumers become more reluctant to buy the tickets due to high price, so the seats sold drops, resulting in lower gross revenue at high prices. 
