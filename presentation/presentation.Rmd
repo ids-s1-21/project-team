@@ -134,7 +134,8 @@ grosses_size %>%
        y = "Weekly Gross Revenue", 
        x = "Percentage of Seats Capacity Sold",
        color = "Theatre Size") +
-  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))+
+  scale_x_continuous(labels = label_dollar(suffix = "%", prefix = "", scale = 100))
 ```
 
 ## Week Running
@@ -166,7 +167,8 @@ grosses %>%
   labs(title = "Average Ticket Price vs Weekly Gross Revenue",
        x = "Average Ticket Price",
        y = "Weekly Gross Revenue") +
-  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
+  scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))+
+  scale_x_continuous(labels = (labels= label_dollar(prefix = "$",scale = 1)))
 ```
 
 ## Average Ticket Price vs Seats Sold
@@ -182,7 +184,8 @@ grosses %>%
              colour = "red") +
   labs(title = "Average Ticket Price vs Seats Sold",
        x = "Average Ticket Price",
-       y = "Seats Sold")
+       y = "Seats Sold")+
+  scale_x_continuous(labels = (labels= label_dollar(prefix = "$",scale = 1)))
 ```
 
 ## The Log Model
