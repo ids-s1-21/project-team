@@ -82,13 +82,17 @@ gross revenue is the theatre size.
 
 ### Percentage of Seats Capacity Sold and Weekly Gross Revenue:
 
-We plotte a scatter plot for the visualization of “weekly gross revenue”
-vs. “percentage of seats capacity sold” and mapped colours according to
-theatre size. The plot reveals the fact that higher percentage of seats
-capacity sold leads to higher weekly gross revenue. Besides, we find
-that even under same percentage, theatres with larger size will have
-higher weekly gross revenue. This is the same as we expected, since the
-total number of seats is higher in larger theatres.
+We plotted a scatter plot for the visualization of “weekly gross
+revenue” vs. “percentage of seats capacity sold” and mapped colours
+according to theatre size. The plot reveals the fact that higher
+percentage of seats capacity sold leads to higher weekly gross revenue.
+Besides, we find that even under same percentage, theatres with larger
+size will have higher weekly gross revenue. This is the same as we
+expected, since the total number of seats is higher in larger theatres.
+What’s interesting is that those with above 100% in seat capacity
+actually had less revenue. This likely meant that standing seats tickets
+were sold and lower priced, thus dragging average pricec down. This may
+in turn decrease the weekly gross revenue resulting in those points.
 
 ### Week Running and Weekly Gross Revenue:
 
@@ -102,14 +106,14 @@ not a factor of weekly gross revenue.
 
 ### Number of Performances in the Week and Weekly Gross Revenue:
 
-We then use geom_jitter for the plot of “weekly gross revenue”
-vs. “number of performances in the week”. However, the graph doesn’t
-indicate any relationship between them since the data are randomly
-disbributed without any pattern (that is, theatres with low number of
-performances per week can have high weekly revenue, while those with
-high number of performances per week may receive revenue not as high).
-This is the same for the relationship between “number of performances in
-the week” and “average ticket price”.
+We then made a scatter plot of “weekly gross revenue” against “number of
+performances in the week”. However, the graph doesn’t indicate any
+relationship between them since the data are randomly disbributed
+without any pattern (that is, theatres with low number of performances
+per week can have high weekly revenue, while those with high number of
+performances per week may receive revenue not as high). This is the same
+for the relationship between “number of performances in the week” and
+“average ticket price”.
 
 ### Main Research: Average Ticket Price and Weekly Gross Revenue
 
@@ -147,7 +151,9 @@ We set the linear regression model, splitting our data into testing and
 training, whilst creating a recipe and workflow, and was able to derive
 the R squared and RMSE values for testing and training data, which we
 found to be relatively similar. Both the R squared and RMSE value is
-similar for both training and testing data.
+similar for both training and testing data, where both R squared values
+were relatively high at around 0.91 and RMSE values were relatively low
+at around 0.45.
 
 Here is the mathematical equation that we derived from the model:
 *y* = *e*<sup>6.81</sup>*x*<sup>1.51</sup>
