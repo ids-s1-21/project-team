@@ -68,8 +68,8 @@ grosses %>%
   geom_point() +
   geom_smooth(se = FALSE) +
   labs(title = "Average Ticket Price vs Weekly Gross Revenue",
-       x = "Average Ticket Price",
-       y = "Weekly Gross Revenue") +
+       x = "Average Ticket Price ($)",
+       y = "Weekly Gross Revenue ($)") +
   scale_y_continuous(labels = label_dollar(suffix = "M", scale = 1e-6))
 ```
 
