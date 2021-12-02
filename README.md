@@ -185,7 +185,7 @@ average ticket prices for some shows.
 ## Presentation
 
 Our presentation can be found
-[here](http://rpubs.com/JeniLiu/presentation).
+[here](https://rpubs.com/Felix_Fung/842730).
 
 Our pre-recorded video can be found
 [here](https://media.ed.ac.uk/media/IDS+2021-2022+PresentationA+team/1_ac93sfh1).

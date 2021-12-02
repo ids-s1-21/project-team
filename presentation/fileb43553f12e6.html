@@ -1,0 +1,477 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="team   Felix, Jeni, Janet" />
+  <meta name="dcterms.date" content="2021-12-02" />
+  <title>Maximising Profits for Broadway Theatres</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="presentation_files/reveal.js-4.1.2/dist/reset.css">
+  <link rel="stylesheet" href="presentation_files/reveal.js-4.1.2/dist/reveal.css">
+
+  <style type="text/css">
+    /* CSS from pandoc style.html() */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+              </style>
+
+  <link rel="stylesheet" href="presentation_files/reveal.js-4.1.2/dist/theme/simple.css" id="theme">
+
+
+  <style type="text/css">
+  /* some tweaks to reveal css */
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+  </style>
+
+    <script src="presentation_files/header-attrs-2.11/header-attrs.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Maximising Profits for Broadway Theatres</h1>
+  <h2 class="author"><font size='8'>team <br> Felix, Jeni, Janet</font></h2>
+  <h3 class="institute"><font size='10'>University of Edinburgh</font></h2>
+  <h3 class="date"><font size = '6'>2021-12-02</font></h3>
+</section>
+
+<section id="dataset" class="title-slide slide level1">
+<h1>Dataset</h1>
+<ul>
+<li>Tidy Tuesday project file</li>
+<li>Compiled from Playbill, a magazine for theatres</li>
+<li>Information on weekly grosses, average ticket price, etc of different theatre shows</li>
+<li>14 variables, 47,524 observations</li>
+<li><code>weekly_gross</code>, <code>avg_ticket_price</code>, <code>seats_sold</code>, <code>seats_in_theatre</code>, <code>pct_capacity</code>, <code>performances</code></li>
+</ul>
+</section>
+
+<section id="dataset-1" class="title-slide slide level1">
+<h1>Dataset</h1>
+<pre><code>## Rows: 47,524
+## Columns: 14
+## $ week_ending          &lt;date&gt; 1985-06-09, 1985-06-09, 1985-06-09, 1985-06-09, …
+## $ week_number          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ weekly_gross_overall &lt;dbl&gt; 3915937, 3915937, 3915937, 3915937, 3915937, 3915…
+## $ show                 &lt;chr&gt; &quot;42nd Street&quot;, &quot;A Chorus Line&quot;, &quot;Aren&#39;t We All?&quot;,…
+## $ theatre              &lt;chr&gt; &quot;St. James Theatre&quot;, &quot;Sam S. Shubert Theatre&quot;, &quot;B…
+## $ weekly_gross         &lt;dbl&gt; 282368, 222584, 249272, 95688, 61059, 255386, 306…
+## $ potential_gross      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ avg_ticket_price     &lt;dbl&gt; 30.42, 27.25, 33.75, 20.87, 20.78, 31.96, 28.33, …
+## $ top_ticket_price     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ seats_sold           &lt;dbl&gt; 9281, 8167, 7386, 4586, 2938, 7992, 10831, 5672, …
+## $ seats_in_theatre     &lt;dbl&gt; 1655, 1472, 1088, 682, 684, 1018, 1336, 1368, 148…
+## $ pct_capacity         &lt;dbl&gt; 0.7010, 0.6935, 0.8486, 0.8405, 0.5369, 0.9813, 1…
+## $ performances         &lt;dbl&gt; 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 0, 8, 8…
+## $ previews             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0…</code></pre>
+</section>
+
+<section>
+<section id="research-question" class="title-slide slide level1">
+<h1>Research Question</h1>
+<ol>
+<li>
+What are the factors that can affect the average ticket price of a show?
+</li>
+<li>
+<b> Hence, how does average ticket price then influence the weekly gross revenue earned? </b>
+</li>
+</ol>
+</section>
+<section id="gross-weekly-revenue" class="slide level2">
+<h2>Gross Weekly Revenue</h2>
+<p><img src="presentation_files/figure-revealjs/weekly-gross-frequency-1.png" width="80%" /></p>
+</section>
+<section id="mutate-theatre-size" class="slide level2">
+<h2>MUTATE Theatre Size</h2>
+<p><font size='8'> less than 750 seats = small, 750 ~ 1300 = medium, more than 1300 = large </font> <img src="presentation_files/figure-revealjs/density-theatre-size-1.png" width="80%" /></p>
+</section>
+<section id="gross-weekly-revenue-1" class="slide level2">
+<h2>Gross Weekly Revenue</h2>
+<p><img src="presentation_files/figure-revealjs/weekly-gross-frequency-theatre-size-1.png" width="80%" /></p>
+</section>
+<section id="percentage-capacity" class="slide level2">
+<h2>Percentage Capacity</h2>
+<p><img src="presentation_files/figure-revealjs/pctcapacity-weeklygross-1.png" width="80%" /></p>
+</section>
+<section id="week-running" class="slide level2">
+<h2>Week Running</h2>
+<p><img src="presentation_files/figure-revealjs/total-weeks-revenue-1.png" width="80%" /></p>
+</section>
+<section id="number-of-performances-per-week" class="slide level2">
+<h2>Number of Performances Per Week</h2>
+<p><img src="presentation_files/figure-revealjs/performances-per-wk-revenue-1.png" width="80%" /></p>
+</section>
+<section id="main-research" class="slide level2">
+<h2>Main Research</h2>
+<p><img src="presentation_files/figure-revealjs/main-question-1.png" width="80%" /></p>
+</section>
+<section id="average-ticket-price-vs-seats-sold" class="slide level2">
+<h2>Average Ticket Price vs Seats Sold</h2>
+<p><img src="presentation_files/figure-revealjs/seats-sold-vs-avg-price-1.png" width="80%" /></p>
+</section>
+<section id="the-log-model" class="slide level2">
+<h2>The Log Model</h2>
+<p><img src="presentation_files/figure-revealjs/log-graph-1.png" width="80%" /></p>
+</section>
+<section id="set-model" class="slide level2">
+<h2>Set Model</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logxy_preliminary <span class="ot">&lt;-</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">&quot;lm&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>logxy <span class="ot">&lt;-</span> logxy_preliminary <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(gross_log <span class="sc">~</span> price_log, <span class="at">data =</span> grosses_log)</span></code></pre></div>
+<p><span class="math display">\[y=e^{6.81}x^{1.51}\]</span></p>
+</section>
+<section id="r-squared-and-rmse" class="slide level2">
+<h2>R Squared and RMSE</h2>
+<pre><code>## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rsq     standard       0.913</code></pre>
+<pre><code>## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rmse    standard       0.445</code></pre>
+<pre><code>## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rsq     standard       0.910</code></pre>
+<pre><code>## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rmse    standard       0.451</code></pre>
+</section>
+<section id="rsq-rmse-table-cross-validation" class="slide level2">
+<h2>RSQ-RMSE Table &amp; Cross Validation</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Pred
+</th>
+<th style="text-align:right;">
+RSQ
+</th>
+<th style="text-align:right;">
+RMSE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Test Data
+</td>
+<td style="text-align:right;">
+0.910
+</td>
+<td style="text-align:right;">
+0.451
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Train Data
+</td>
+<td style="text-align:right;">
+0.913
+</td>
+<td style="text-align:right;">
+0.445
+</td>
+</tr>
+</tbody>
+</table>
+<pre><code>## # A tibble: 2 × 6
+##   .metric .estimator  mean     n std_err .config             
+##   &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+## 1 rmse    standard   0.445     5 0.00415 Preprocessor1_Model1
+## 2 rsq     standard   0.912     5 0.00569 Preprocessor1_Model1</code></pre>
+<pre><code>##       id              .metric           .estimator          .estimate     
+##  Length:10          Length:10          Length:10          Min.   :0.4346  
+##  Class :character   Class :character   Class :character   1st Qu.:0.4436  
+##  Mode  :character   Mode  :character   Mode  :character   Median :0.6760  
+##                                                           Mean   :0.6784  
+##                                                           3rd Qu.:0.9135  
+##                                                           Max.   :0.9241  
+##    .config         
+##  Length:10         
+##  Class :character  
+##  Mode  :character  
+##                    
+##                    
+## </code></pre>
+</section>
+<section id="equation-graph" class="slide level2">
+<h2>Equation &amp; Graph</h2>
+<p><span class="math display">\[y=e^{6.81}x^{1.51}\]</span> <img src="presentation_files/figure-revealjs/log%20curve-1.png" width="80%" /></p>
+</section>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<ul>
+<li>theatre size, percentage capacity, average price influenced weekly gross</li>
+<li>number of performances per week, total number of weeks show ran for did not</li>
+<li>modelled relationship between average ticket price and weekly gross revenue, which was found to be positive</li>
+</ul>
+</section>
+<section id="limitations-extensions" class="slide level2">
+<h2>Limitations &amp; Extensions</h2>
+<ul>
+<li><p>Limitations: might only be a particular set of customers in Broadway, larger samples of data</p></li>
+<li><p>Future Extension: model that can include the exponential curvature of the graph</p></li>
+</ul>
+</section></section>
+<section id="thank-you-for-watching" class="title-slide slide level1">
+<h1>Thank you for watching</h1>
+
+</section>
+    </div>
+  </div>
+
+  <script src="presentation_files/reveal.js-4.1.2/dist/reveal.js"></script>
+  
+  <!-- reveal.js plugins -->
+  
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Can be used to limit the contexts in which the slide number appears
+        showSlideNumber: 'all',
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: false,
+          // Use 1 based indexing for # links to match slide number (default is zero
+        // based)
+        hashOneBasedIndex: false,
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+        // Push each slide change to the browser history
+        // Implies `hash: true`
+        history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+  // Disables the default reveal.js slide layout (scaling and centering)
+  // so that you can use custom CSS layout
+  disableLayout: false,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: false,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Loop the presentation
+        loop: false,
+        // Change the presentation direction to be RTL
+        rtl: false,
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+        // Transition style
+        transition: 'convex', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+        // The display mode that will be used to show slides
+        display: 'block',
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+
+
+        // Optional reveal.js plugins
+        plugins: [
+        ]
+      });
+
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
